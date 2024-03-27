@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gaussian-Flow</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dics.min.css">
+    <!-- <link rel="stylesheet" href="css/bulma.min.css"> -->
+    <script src="scripts/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+    <link rel="shortcut icon" href="assets/icon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <section>
+        <div class="text-center mt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>AddSR: Accelerating Diffusion-based Blind Super-Resolution with Adversarial Diffusion Distillation</h1>
+                        <img src="assets/undercon.png" alt="Page Under Construction", float="left", height="60">
+                        <!-- <span >Page Under Construction</span> -->
+                        <p>We're currently working on this page. Please check back soon.</p>
+                        <hr>
+                        <h5>   Rui Xie<sup>1</sup>,
+                            <a href="https://cszn.github.io/" target="_blank">Kai Zhang<sup>2</sup></a>,
+                            <a href="https://jessezhang92.github.io/" target="_blank">Zhenyu Zhang<sup>3</sup></a>,
+                            <a href="https://scholar.google.com/citations?hl=zh-CN&user=w03CHFwAAAAJ" target="_blank">Jun Zhou<sup>3</sup></a>,
+                            <a href="https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ&hl=zh-CN" target="_blank">Jian Yang<sup>3</sup></a>,
+                            <a href="https://tyshiwo.github.io/index.html" target="_blank">Ying Tai<sup>1<i class="fa fa-envelope"> </i></sup></a> </h5>
+                        <h5 style="color:#000000;"><sup>1 </sup>Nanjing University, <sup>2 </sup>Alibaba Group, <sup>3 </sup>Fudan University</h5>
+                        <!-- <h5 style="color:#000000;"><sup>*</sup>Equally contributed.</h5> -->
+                        <br>
+                        <p>
+                            <a role="button">Paper coming soon</a>
+                            <a class="btn btn-secondary btn-lg" href="https://github.com/CSRuiXie/AddSR" role="button">Code</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap-4.4.1.js"></script>
+</body>
+</html>
