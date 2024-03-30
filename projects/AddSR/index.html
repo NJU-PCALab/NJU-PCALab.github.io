@@ -157,6 +157,7 @@
 
         .preview-container {
             text-align: center;
+            position: relative; /* Added to position full image container */
         }
 
         .preview-image:hover {
@@ -165,6 +166,23 @@
 
         .hidden {
             display: none;
+        }
+
+        /* Added styles for full image container */
+        #fullImageContainer {
+            position: absolute;
+            top: -100%; /* Adjust this value as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            z-index: 9999;
+        }
+
+        #fullImage {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -178,6 +196,12 @@
                     <hr style="margin-top: 0px;">
                 </div>
             </div>
+            <!-- Full image container -->
+            <div id="fullImageContainer" class="row hidden">
+                <div class="col-12">
+                    <img id="fullImage" src="" class="img-fluid">
+                </div>
+            </div>
             <!-- Preview images -->
             <div class="row preview-container">
                 <div class="col-md-6">
@@ -189,12 +213,6 @@
                         onclick="showFullImage('assets/results display/results_display2.png')">
                 </div>
                 <!-- Add more preview images as needed -->
-            </div>
-            <!-- Full image container -->
-            <div id="fullImageContainer" class="row hidden">
-                <div class="col-12">
-                    <img id="fullImage" src="" class="img-fluid">
-                </div>
             </div>
         </div>
     </section>
@@ -210,18 +228,15 @@
 
             // Show the full image container
             fullImageContainer.classList.remove('hidden');
-
-            // Smoothly scroll to the full image
-            fullImageContainer.scrollIntoView({
-                behavior: 'smooth'
-            });
         }
     </script>
 </body>
 
 </html>
 
-
+    <br>
+    <br>
+    <br>
     <section>
         <div class="container">
             <div class="row">
