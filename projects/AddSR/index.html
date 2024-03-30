@@ -210,6 +210,13 @@
             // Show the full image container
             fullImageContainer.classList.remove('hidden');
         }
+
+        // Show the full image of the first preview image when the page loads
+        window.onload = function () {
+            var firstPreviewImage = document.querySelector('.preview-image');
+            var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
+            showFullImage(firstPreviewImagePath);
+        };
     </script>
 </body>
 
