@@ -135,24 +135,91 @@
     <br>
     <br>
     <br>
-<!-- Efficiency  Comparison -->
+<!-- Efficiency Comparison End -->
 
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Preview</title>
+    <style>
+        /* Add your CSS styles here */
+        .preview-image {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .preview-container {
+            text-align: center;
+        }
+
+        .preview-image:hover {
+            opacity: 0.7;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
     <section>
         <div class="container">
-            <div class="row" style="margin-top:5px">
+            <div class="row" style="margin-top: 5px;">
                 <div class="col-12 text-center">
                     <h2>Results Display</h2>
-                    <hr style="margin-top:0px">
+                    <hr style="margin-top: 0px;">
                 </div>
             </div>
-            <img class="img-fluid" src="assets/synthetic.png" alt="">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            <!-- Preview images -->
+            <div class="row preview-container">
+                <div class="col-md-6">
+                    <img src="assets/results display/results_display1.png" class="preview-image"
+                        onclick="showFullImage('assets/results display/results_display1.png')">
+                </div>
+                <div class="col-md-6">
+                    <img src="assets/results display/results_display2.png" class="preview-image"
+                        onclick="showFullImage('assets/results display/results_display2.png')">
+                </div>
+                <!-- Add more preview images as needed -->
+            </div>
+            <!-- Full image container -->
+            <div id="fullImageContainer" class="row hidden">
+                <div class="col-12">
+                    <img id="fullImage" src="" class="img-fluid">
+                </div>
+            </div>
         </div>
     </section>
+
+    <script>
+        // JavaScript function to show full image when preview image is clicked
+        function showFullImage(fullImagePath) {
+            var fullImageContainer = document.getElementById('fullImageContainer');
+            var fullImage = document.getElementById('fullImage');
+
+            // Set the source of the full image
+            fullImage.src = fullImagePath;
+
+            // Show the full image container
+            fullImageContainer.classList.remove('hidden');
+
+            // Smoothly scroll to the full image
+            fullImageContainer.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+
+</html>
 
 
     <section>
