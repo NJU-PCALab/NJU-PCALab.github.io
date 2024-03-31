@@ -150,7 +150,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    flex-wrap: wrap;
 }
 
 .image-row img {
@@ -166,7 +166,7 @@
     height: auto;
     display: none;
     position: absolute;
-    top: calc(100% + 20px);
+    bottom: calc(100% + 20px);
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
@@ -214,9 +214,9 @@ function showGif(gifPath) {
     var imageRowBottom = imageRow.getBoundingClientRect().bottom;
     if (gifPreviewBottom > imageRowBottom) {
         var offset = gifPreviewBottom - imageRowBottom + 20; // 加上一些额外的间距
-        gifPreview.style.top = 'calc(100% + ' + offset + 'px)';
+        imageRow.style.marginBottom = offset + 'px';
     } else {
-        gifPreview.style.top = 'calc(100% + 20px)';
+        imageRow.style.marginBottom = '20px';
     }
 
     // 显示 GIF 图像的容器
