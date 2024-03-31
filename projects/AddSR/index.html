@@ -159,11 +159,15 @@
     height: auto; /* 让高度根据比例自动调整 */
 }
 
-.gif-preview {
+.gif-preview-container {
     max-width: 100%;
     width: 300px; /* 设置预览图宽度 */
     height: auto; /* 让高度根据比例自动调整 */
     display: none;
+}
+.gif-preview-container img {
+    width: 100%;
+    height: auto;
 }
 </style>
 </head>
@@ -190,16 +194,15 @@
     </div>
 </section>
 
-<div id="gifPreview" class="gif-preview"></div>
+<div id="gifPreview" class="gif-preview-container"></div>
 
 <script>
 function showGif(gifPath) {
     var gifPreview = document.getElementById('gifPreview');
     gifPreview.innerHTML = '<img src="' + gifPath + '" class="gif-preview">'; // 设置图片的HTML内容
 
-    // 设置显示 GIF 图像的样式
-    var gifImage = gifPreview.querySelector('img');
-    gifImage.style.display = 'block';
+    // 显示 GIF 图像的容器
+    gifPreview.style.display = 'block';
 }
 </script>
 
