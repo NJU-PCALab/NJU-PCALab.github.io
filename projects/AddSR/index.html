@@ -195,9 +195,11 @@
 <script>
 function showGif(gifPath) {
     var gifPreview = document.getElementById('gifPreview');
-    gifPreview.innerHTML = '<img src="' + gifPath + '" class="gif-preview">'; // 直接设置图片的HTML内容
+    gifPreview.innerHTML = '<img src="' + gifPath + '" class="gif-preview">'; // 设置图片的HTML内容
 
-    gifPreview.style.display = 'block';
+    // 设置显示 GIF 图像的样式
+    var gifImage = gifPreview.querySelector('img');
+    gifImage.style.display = 'block';
 }
 </script>
 
