@@ -149,17 +149,11 @@
     <style>
         /* Add your CSS styles here */
         .preview-image {
-            max-width: 80px; /* 缩小预览图像的最大宽度 */
-            height: auto;
+            max-width: 100%; /* 限制预览图像的最大宽度 */
+            height: auto; /* 自动调整高度以保持宽高比 */
             cursor: pointer;
             margin: 5px; /* 添加外边距 */
             margin-bottom: 10px; /* 添加底部间距 */
-        }
-
-        .preview-container {
-            display: flex;
-            justify-content: center; /* 水平居中对齐 */
-            flex-wrap: wrap; /* 如果需要的话，使内容换行 */
         }
 
         .preview-image:hover {
@@ -168,6 +162,18 @@
 
         .hidden {
             display: none;
+        }
+
+        /* 新增样式 */
+        .full-gif-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px; /* 调整顶部间距 */
+        }
+
+        .full-gif {
+            max-width: 500px;
+            max-height: 500px;
         }
     </style>
 </head>
@@ -182,9 +188,9 @@
                 </div>
             </div>
             <!-- Full image container -->
-            <div id="fullGifContainer" class="row hidden">
-                <div class="col-12">
-                    <img id="fullGif" src="" class="img-fluid">
+            <div id="fullGifContainer" class="row hidden full-gif-container">
+                <div class="col-12 text-center">
+                    <img id="fullGif" src="" class="full-gif">
                 </div>
             </div>
             <!-- Preview images -->
@@ -233,8 +239,11 @@
         // Show the full image of the first preview image when the page loads
         var firstPreviewImage = document.querySelector('.preview-image');
         var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
-        showFullGif('assets/results display/results_display1.png');
+        showFullGif('assets/results display/LR v.s. AddSR/1.gif');
     </script>
+</body>
+
+</html>
 <!-- Results Display End-->
 
     <br>
