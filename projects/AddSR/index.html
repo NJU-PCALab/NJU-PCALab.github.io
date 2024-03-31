@@ -164,6 +164,11 @@
     width: 300px; /* 设置预览图宽度 */
     height: auto; /* 让高度根据比例自动调整 */
     display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999; /* 确保预览图位于最上层 */
 }
 .gif-preview-container img {
     width: 100%;
