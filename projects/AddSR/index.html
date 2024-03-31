@@ -155,30 +155,37 @@
 .image-row img {
     margin: 10px;
     cursor: pointer;
+    width: 150px; /* 设置图像宽度 */
+    height: auto; /* 让高度根据比例自动调整 */
 }
 
 .gif-preview {
     display: none;
     max-width: 100%;
+    width: 300px; /* 设置预览图宽度 */
+    height: auto; /* 让高度根据比例自动调整 */
 }
 </style>
 </head>
 <body>
 
-<div class="image-row" id="imageRow">
-    <!-- 第一组数据 -->
-    <img src="assets/results display/LR v.s. AddSR/AddSR-046.png" alt="Image 1" onclick="showGif('assets/results display/LR v.s. AddSR/1.gif')">
-    <!-- 第二组数据 -->
-    <img src="assets/results display/LR v.s. AddSR/AddSR-075.png" alt="Image 2" onclick="showGif('assets/results display/LR v.s. AddSR/2.gif')">
-    <!-- 第三组数据 -->
-    <img src="assets/results display/LR v.s. AddSR/AddSR-089.png" alt="Image 3" onclick="showGif('assets/results display/LR v.s. AddSR/3.gif')">
-    <!-- 第四组数据 -->
-    <img src="assets/results display/LR v.s. AddSR/AddSR-126.png" alt="Image 4" onclick="showGif('assets/results display/LR v.s. AddSR/4.gif')">
-    <!-- 第五组数据 -->
-    <img src="assets/results display/LR v.s. AddSR/AddSR-176.png" alt="Image 5" onclick="showGif('assets/results display/LR v.s. AddSR/5.gif')">
-    <!-- 第六组数据 -->
-    <img src="assets/results display/LR v.s. AddSR/AddSR-187.png" alt="Image 6" onclick="showGif('assets/results display/LR v.s. AddSR/6.gif')">
-</div>
+<section>
+    <h2>Results Display</h2>
+    <div class="image-row" id="imageRow">
+        <!-- 第一组数据 -->
+        <img src="assets/results display/LR v.s. AddSR/AddSR-046.png" alt="Image 1" onclick="showGif('assets/results display/LR v.s. AddSR/1.gif')">
+        <!-- 第二组数据 -->
+        <img src="assets/results display/LR v.s. AddSR/AddSR-075.png" alt="Image 2" onclick="showGif('assets/results display/LR v.s. AddSR/2.gif')">
+        <!-- 第三组数据 -->
+        <img src="assets/results display/LR v.s. AddSR/AddSR-089.png" alt="Image 3" onclick="showGif('assets/results display/LR v.s. AddSR/3.gif')">
+        <!-- 第四组数据 -->
+        <img src="assets/results display/LR v.s. AddSR/AddSR-126.png" alt="Image 4" onclick="showGif('assets/results display/LR v.s. AddSR/4.gif')">
+        <!-- 第五组数据 -->
+        <img src="assets/results display/LR v.s. AddSR/AddSR-176.png" alt="Image 5" onclick="showGif('assets/results display/LR v.s. AddSR/5.gif')">
+        <!-- 第六组数据 -->
+        <img src="assets/results display/LR v.s. AddSR/AddSR-187.png" alt="Image 6" onclick="showGif('assets/results display/LR v.s. AddSR/6.gif')">
+    </div>
+</section>
 
 <div id="gifPreview" class="gif-preview"></div>
 
