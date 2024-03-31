@@ -195,12 +195,8 @@
 <script>
 function showGif(gifPath) {
     var gifPreview = document.getElementById('gifPreview');
-    gifPreview.innerHTML = ''; // 清空之前的预览
+    gifPreview.innerHTML = '<img src="' + gifPath + '" class="gif-preview">'; // 直接设置图片的HTML内容
 
-    var gifImage = document.createElement('img');
-    gifImage.src = gifPath;
-    gifImage.classList.add('gif-preview');
-    gifPreview.appendChild(gifImage);
     gifPreview.style.display = 'block';
 }
 </script>
