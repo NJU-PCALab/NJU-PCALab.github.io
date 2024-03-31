@@ -228,11 +228,9 @@
         }
 
         // Show the full image of the first preview image when the page loads
-        window.onload = function () {
-            var firstPreviewImage = document.querySelector('.preview-image');
-            var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
-            showFullImage(firstPreviewImagePath);
-        };
+        var firstPreviewImage = document.querySelector('.preview-image');
+        var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
+        showFullImage('assets/results display/results_display1.png');
     </script>
 </body>
 
