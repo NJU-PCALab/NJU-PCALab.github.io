@@ -141,62 +141,104 @@
 <!-- Results Display -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GIF Comparison</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-    .gif-container {
-        margin-bottom: 20px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Preview</title>
+    <style>
+        /* Add your CSS styles here */
+        .preview-image {
+            max-width: 80px; /* 缩小预览图像的最大宽度 */
+            height: auto;
+            cursor: pointer;
+            margin: 5px; /* 添加外边距 */
+            margin-bottom: 10px; /* 添加底部间距 */
+        }
+
+        .preview-container {
+            display: flex;
+            justify-content: center; /* 水平居中对齐 */
+            flex-wrap: wrap; /* 如果需要的话，使内容换行 */
+        }
+
+        .preview-image:hover {
+            opacity: 0.7;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
+    <section>
+        <div class="container">
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-12 text-center">
+                    <h2>Results Display</h2>
+                    <hr style="margin-top: 0px;">
+                </div>
+            </div>
+            <!-- Full image container -->
+            <div id="fullGifContainer" class="row hidden">
+                <div class="col-12">
+                    <img id="fullGif" src="" class="img-fluid">
+                </div>
+            </div>
+            <!-- Preview images -->
+            <div class="row preview-container">
+                <div class="col-md-1">
+                    <img src="assets/results display/preview_1.png" class="preview-image"
+                        onclick="showFullGif('assets/results display/results_display1.png')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/results display/preview_2.png" class="preview-image"
+                        onclick="showFullGif('assets/results display/results_display2.png')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/results display/preview_3.png" class="preview-image"
+                        onclick="showFullGif('assets/results display/results_display3.png')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/results display/preview_4.png" class="preview-image"
+                        onclick="showFullGif('assets/results display/results_display4.png')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/results display/preview_5.png" class="preview-image"
+                        onclick="showFullGif('assets/results display/results_display5.png')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/results display/preview_6.png" class="preview-image"
+                        onclick="showFullGif('assets/results display/results_display6.png')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/results display/preview_7.png" class="preview-image"
+                        onclick="showFullGif('assets/results display/results_display7.png')">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2>Results Display</h2>
-                <hr style="margin-top:0px">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 gif-container">
-                <!-- 第一行 -->
-                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/1.gif" alt="LR v.s. AddSR-4">
-                <p class="text-center">LR v.s. AddSR-4</p>
-            </div>
-            <div class="col-md-4 gif-container">
-                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/2.gif" alt="LR v.s. AddSR-4">
-                <p class="text-center">LR v.s. AddSR-4</p>
-            </div>
-            <div class="col-md-4 gif-container">
-                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/3.gif" alt="LR v.s. AddSR-4">
-                <p class="text-center">LR v.s. AddSR-4</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 gif-container">
-                <!-- 第二行 -->
-                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/4.gif" alt="LR v.s. AddSR-4" style="width: 125%; height: auto;">
-                <p class="text-center">LR v.s. AddSR-4</p>
-            </div>
-            <div class="col-md-4 gif-container">
-                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/5.gif" alt="LR v.s. AddSR-4">
-                <p class="text-center">LR v.s. AddSR-4</p>
-            </div>
-            <div class="col-md-4 gif-container">
-                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/6.gif" alt="LR v.s. AddSR-4">
-                <p class="text-center">LR v.s. AddSR-4</p>
-            </div>
-        </div>
-    </div>
-</section>
+    <script>
+        // JavaScript function to show full image when preview image is clicked
+        function showFullGif(fullGifPath) {
+            var fullGifContainer = document.getElementById('fullGifContainer');
+            var fullGif = document.getElementById('fullGif');
 
-</body>
-</html>
+            // Set the source of the full image
+            fullGif.src = fullGifPath;
+
+            // Show the full image container
+            fullGifContainer.classList.remove('hidden');
+        }
+
+        // Show the full image of the first preview image when the page loads
+        var firstPreviewImage = document.querySelector('.preview-image');
+        var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
+        showFullGif('assets/results display/results_display1.png');
+    </script>
 <!-- Results Display End-->
 
     <br>
@@ -283,7 +325,6 @@
                     <img src="assets/results display/preview_7.png" class="preview-image"
                         onclick="showFullImage('assets/results display/results_display7.png')">
                 </div>
-                <!-- Add more preview images as needed -->
             </div>
         </div>
     </section>
