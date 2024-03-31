@@ -144,85 +144,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Preview</title>
+<title>GIF Comparison</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
-.image-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.image-row img {
-    margin: 10px;
-    cursor: pointer;
-    width: 150px;
-    height: auto;
-}
-
-.gif-preview-container {
-    max-width: 100%;
-    width: 300px;
-    height: auto;
-    display: none;
-    position: absolute;
-    bottom: calc(100% + 20px);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-}
-
-.gif-preview-container img {
-    width: 100%;
-    height: auto;
-}
+    .gif-container {
+        margin-bottom: 20px;
+    }
 </style>
 </head>
 <body>
 
 <section>
-    <div class="col-12 text-center">
-        <h2>Results Display</h2>
-        <hr style="margin-top:0px">
-    </div>
-    <div class="image-row" id="imageRow">
-        <!-- 第一组数据 -->
-        <img src="assets/results display/LR v.s. AddSR/AddSR-046.png" alt="Image 1" onclick="showGif('assets/results display/LR v.s. AddSR/1.gif')">
-        <!-- 第二组数据 -->
-        <img src="assets/results display/LR v.s. AddSR/AddSR-075.png" alt="Image 2" onclick="showGif('assets/results display/LR v.s. AddSR/2.gif')">
-        <!-- 第三组数据 -->
-        <img src="assets/results display/LR v.s. AddSR/AddSR-089.png" alt="Image 3" onclick="showGif('assets/results display/LR v.s. AddSR/3.gif')">
-        <!-- 第四组数据 -->
-        <img src="assets/results display/LR v.s. AddSR/AddSR-126.png" alt="Image 4" onclick="showGif('assets/results display/LR v.s. AddSR/4.gif')">
-        <!-- 第五组数据 -->
-        <img src="assets/results display/LR v.s. AddSR/AddSR-176.png" alt="Image 5" onclick="showGif('assets/results display/LR v.s. AddSR/5.gif')">
-        <!-- 第六组数据 -->
-        <img src="assets/results display/LR v.s. AddSR/AddSR-187.png" alt="Image 6" onclick="showGif('assets/results display/LR v.s. AddSR/6.gif')">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Results Display</h2>
+                <hr style="margin-top:0px">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 gif-container">
+                <!-- 第一行 -->
+                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/1.gif" alt="LR v.s. AddSR-4">
+                <p class="text-center">LR v.s. AddSR-4</p>
+            </div>
+            <div class="col-md-4 gif-container">
+                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/2.gif" alt="LR v.s. AddSR-4">
+                <p class="text-center">LR v.s. AddSR-4</p>
+            </div>
+            <div class="col-md-4 gif-container">
+                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/3.gif" alt="LR v.s. AddSR-4">
+                <p class="text-center">LR v.s. AddSR-4</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 gif-container">
+                <!-- 第二行 -->
+                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/4.gif" alt="LR v.s. AddSR-4">
+                <p class="text-center">LR v.s. AddSR-4</p>
+            </div>
+            <div class="col-md-4 gif-container">
+                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/5.gif" alt="LR v.s. AddSR-4">
+                <p class="text-center">LR v.s. AddSR-4</p>
+            </div>
+            <div class="col-md-4 gif-container">
+                <img class="img-fluid" src="assets/results display/LR v.s. AddSR/6.gif" alt="LR v.s. AddSR-4">
+                <p class="text-center">LR v.s. AddSR-4</p>
+            </div>
+        </div>
     </div>
 </section>
-
-<div id="gifPreview" class="gif-preview-container"></div>
-
-<script>
-function showGif(gifPath) {
-    var gifPreview = document.getElementById('gifPreview');
-    gifPreview.innerHTML = '<img src="' + gifPath + '" class="gif-preview">';
-
-    // 如果预览图遮挡了图片行，则向上移动图片行
-    var imageRow = document.getElementById('imageRow');
-    var gifPreviewBottom = gifPreview.getBoundingClientRect().bottom;
-    var imageRowBottom = imageRow.getBoundingClientRect().bottom;
-    if (gifPreviewBottom > imageRowBottom) {
-        var offset = gifPreviewBottom - imageRowBottom + 20; // 加上一些额外的间距
-        imageRow.style.marginBottom = offset + 'px';
-    } else {
-        imageRow.style.marginBottom = '20px';
-    }
-
-    // 显示 GIF 图像的容器
-    gifPreview.style.display = 'block';
-}
-</script>
 
 </body>
 </html>
