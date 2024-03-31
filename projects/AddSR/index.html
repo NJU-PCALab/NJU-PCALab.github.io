@@ -223,7 +223,9 @@
         }
 
         .preview-container {
-            text-align: center;
+            display: flex;
+            justify-content: center; /* 水平居中对齐 */
+            flex-wrap: wrap; /* 如果需要的话，使内容换行 */
         }
 
         .preview-image:hover {
@@ -232,12 +234,6 @@
 
         .hidden {
             display: none;
-        }
-
-        /* 调整列之间的间距 */
-        .preview-container .col-md-2 {
-            padding-right: 1px;
-            padding-left: 1px;
         }
     </style>
 </head>
