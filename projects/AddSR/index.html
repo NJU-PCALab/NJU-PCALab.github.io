@@ -237,10 +237,22 @@
 
 </html>
 
+    <br>
+    <br>
+    <br>
 
-    <br>
-    <br>
-    <br>
+    /* 添加图像之间的间隔 */
+    .row:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    /* 文本样式 */
+    .text-left p {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
     <section>
         <div class="container">
             <div class="row" style="margin-top:5px">
@@ -249,14 +261,32 @@
                     <hr style="margin-top:0px">
                 </div>
             </div>
-            <img class="img-fluid" src="assets/results display/synthetic.png" alt="">
-            <img class="img-fluid" src="assets/results display/Real-world.png" alt="">
-            <br>
-            <br>
-            <br>
+            <div class="row">
+                <div class="col-12 text-left">
+                    <p>Results on Synthetic LR images</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-left">
+                    <img class="img-fluid" src="assets/results display/synthetic.png" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-left">
+                    <p>Results on Real-World LR images</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-left">
+                    <img class="img-fluid" src="assets/results display/Real-world.png" alt="">
+                </div>
+            </div>
         </div>
     </section>
 
+    <br>
+    <br>
+    <br>
 
     <section>
         <div class="container">
