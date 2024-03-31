@@ -150,27 +150,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* 添加相对定位 */
+    position: relative;
 }
 
 .image-row img {
     margin: 10px;
     cursor: pointer;
-    width: 150px; /* 设置图像宽度 */
-    height: auto; /* 让高度根据比例自动调整 */
+    width: 150px;
+    height: auto;
 }
 
 .gif-preview-container {
     max-width: 100%;
-    width: 300px; /* 设置预览图宽度 */
-    height: auto; /* 让高度根据比例自动调整 */
+    width: 300px;
+    height: auto;
     display: none;
     position: absolute;
-    top: -50px; /* 将预览图上移一些 */
+    top: calc(100% + 20px);
     left: 50%;
     transform: translateX(-50%);
-    z-index: 999; /* 确保预览图位于最上层 */
+    z-index: 999;
 }
+
 .gif-preview-container img {
     width: 100%;
     height: auto;
@@ -205,7 +206,18 @@
 <script>
 function showGif(gifPath) {
     var gifPreview = document.getElementById('gifPreview');
-    gifPreview.innerHTML = '<img src="' + gifPath + '" class="gif-preview">'; // 设置图片的HTML内容
+    gifPreview.innerHTML = '<img src="' + gifPath + '" class="gif-preview">';
+
+    // 如果预览图遮挡了图片行，则向上移动图片行
+    var imageRow = document.getElementById('imageRow');
+    var gifPreviewBottom = gifPreview.getBoundingClientRect().bottom;
+    var imageRowBottom = imageRow.getBoundingClientRect().bottom;
+    if (gifPreviewBottom > imageRowBottom) {
+        var offset = gifPreviewBottom - imageRowBottom + 20; // 加上一些额外的间距
+        gifPreview.style.top = 'calc(100% + ' + offset + 'px)';
+    } else {
+        gifPreview.style.top = 'calc(100% + 20px)';
+    }
 
     // 显示 GIF 图像的容器
     gifPreview.style.display = 'block';
