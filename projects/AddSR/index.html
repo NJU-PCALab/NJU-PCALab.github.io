@@ -139,105 +139,69 @@
 
 
 <!-- Results Display -->
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Preview</title>
+<style>
+.image-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Image Preview</title>-->
-<!--    <style>-->
-<!--        /* Add your CSS styles here */-->
-<!--        .preview-image {-->
-<!--            max-width: 80px; /* 缩小预览图像的最大宽度 */-->
-<!--            height: auto;-->
-<!--            cursor: pointer;-->
-<!--            margin: 1px; /* 缩小预览图像之间的外边距 */-->
-<!--            margin-bottom: 10px; /* 添加底部间距 */-->
-<!--        }-->
+.image-row img {
+    margin: 10px;
+    cursor: pointer;
+}
 
-<!--        .preview-container {-->
-<!--            text-align: center;-->
-<!--        }-->
+.gif-preview {
+    display: none;
+    max-width: 100%;
+}
+</style>
+</head>
+<body>
 
-<!--        .preview-image:hover {-->
-<!--            opacity: 0.7;-->
-<!--        }-->
+<div class="image-row" id="imageRow">
+    <!-- 第一组数据 -->
+    <img src="assets/results display/LR v.s. AddSR/AddSR-046.png" alt="Image 1" onclick="showGif('assets/results display/LR v.s. AddSR/1.gif')">
+    <!-- 第二组数据 -->
+    <img src="assets/results display/LR v.s. AddSR/AddSR-075.png" alt="Image 2" onclick="showGif('assets/results display/LR v.s. AddSR/2.gif')">
+    <!-- 第三组数据 -->
+    <img src="assets/results display/LR v.s. AddSR/AddSR-089.png" alt="Image 3" onclick="showGif('assets/results display/LR v.s. AddSR/3.gif')">
+    <!-- 第四组数据 -->
+    <img src="assets/results display/LR v.s. AddSR/AddSR-126.png" alt="Image 4" onclick="showGif('assets/results display/LR v.s. AddSR/4.gif')">
+    <!-- 第五组数据 -->
+    <img src="assets/results display/LR v.s. AddSR/AddSR-176.png" alt="Image 5" onclick="showGif('assets/results display/LR v.s. AddSR/5.gif')">
+    <!-- 第六组数据 -->
+    <img src="assets/results display/LR v.s. AddSR/AddSR-187.png" alt="Image 6" onclick="showGif('assets/results display/LR v.s. AddSR/6.gif')">
+</div>
 
-<!--        .hidden {-->
-<!--            display: none;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
+<div id="gifPreview" class="gif-preview"></div>
 
-<!--<body>-->
-<!--    <section>-->
-<!--        <div class="container">-->
-<!--            <div class="row" style="margin-top: 5px;">-->
-<!--                <div class="col-12 text-center">-->
-<!--                    <h2>Results Display</h2>-->
-<!--                    <hr style="margin-top: 0px;">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; Full image container &ndash;&gt;-->
-<!--            <div id="fullImageContainer_" class="row hidden">-->
-<!--                <div class="col-12">-->
-<!--                    <img id="fullImage_" src="" class="img-fluid">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; Preview images &ndash;&gt;-->
-<!--            <div class="row preview-container">-->
-<!--                <div class="col-md-2">-->
-<!--                    <img src="assets/results display/LR v.s. AddSR/AddSR-046.png" class="preview-image"-->
-<!--                        onclick="showFullImage('assets/results display/LR v.s. AddSR/1.gif')">-->
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-<!--                    <img src="assets/results display/LR v.s. AddSR/AddSR-075.png" class="preview-image"-->
-<!--                        onclick="showFullImage('assets/results display/LR v.s. AddSR/2.gif')">-->
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-<!--                    <img src="assets/results display/LR v.s. AddSR/AddSR-089.png" class="preview-image"-->
-<!--                        onclick="showFullImage('assets/results display/LR v.s. AddSR/3.gif')">-->
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-<!--                    <img src="assets/results display/LR v.s. AddSR/AddSR-126.png" class="preview-image"-->
-<!--                        onclick="showFullImage('assets/results display/LR v.s. AddSR/4.gif')">-->
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-<!--                    <img src="assets/results display/LR v.s. AddSR/AddSR-176.png" class="preview-image"-->
-<!--                        onclick="showFullImage('assets/results display/LR v.s. AddSR/5.gif')">-->
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-<!--                    <img src="assets/results display/LR v.s. AddSR/AddSR-187.png" class="preview-image"-->
-<!--                        onclick="showFullImage('assets/results display/LR v.s. AddSR/6.gif')">-->
-<!--                </div>-->
-<!--                &lt;!&ndash; Add more preview images as needed &ndash;&gt;-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
+<script>
+function showGif(gifPath) {
+    var gifPreview = document.getElementById('gifPreview');
+    gifPreview.innerHTML = ''; // 清空之前的预览
 
-<!--    <script>-->
-<!--        // JavaScript function to show full image when preview image is clicked-->
-<!--        function showFullImage(fullImagePath) {-->
-<!--            var fullImageContainer_ = document.getElementById('fullImageContainer_');-->
-<!--            var fullImage_ = document.getElementById('fullImage_');-->
+    var gifImage = document.createElement('img');
+    gifImage.src = gifPath;
+    gifImage.classList.add('gif-preview');
+    gifPreview.appendChild(gifImage);
+    gifPreview.style.display = 'block';
+}
+</script>
 
-<!--            // Set the source of the full image-->
-<!--            fullImage_.src = fullImagePath;-->
-
-<!--            // Show the full image container-->
-<!--            fullImageContainer_.classList.remove('hidden');-->
-<!--        }-->
-
-<!--        // Show the full image of the first preview image when the page loads-->
-<!--        var firstPreviewImage = document.querySelector('.preview-image');-->
-<!--        var firstPreviewImagePath = firstPreviewImage.getAttribute('src');-->
-<!--        showFullImage('assets/results display/LR v.s. AddSR/1.gif');-->
-<!--    </script>-->
-<!--</body>-->
-
-<!--</html>-->
+</body>
+</html>
 <!-- Results Display End-->
+
+    <br>
+    <br>
+    <br>
 
 
 <!-- Qualitative Comparison -->
