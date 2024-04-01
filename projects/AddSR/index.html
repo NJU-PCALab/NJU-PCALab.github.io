@@ -553,19 +553,36 @@
             fullImage_prompt.src = fullImagePath;
             fullGif_prompt.src = fullGifPath;
 
+            // 变量用于跟踪两个图像是否都加载完成
+            var imageLoaded = false;
+            var gifLoaded = false;
+
             // 监听图片加载完成事件
             fullImage_prompt.onload = function () {
-                // 获取 GIF 的实际尺寸
-                var gifWidth = fullGif_prompt.width;
-                var gifHeight = fullGif_prompt.height;
-
-                // 设置大图的宽度为 GIF 的宽度，并保持宽高比
-                fullImage_prompt.style.width = gifWidth + 'px';
-                fullImage_prompt.style.height = 'auto';
-
-                // 显示完整内容容器
-                fullContainer.classList.remove('hidden');
+                imageLoaded = true;
+                checkIfAllLoaded();
             };
+
+            fullGif_prompt.onload = function () {
+                gifLoaded = true;
+                checkIfAllLoaded();
+            };
+
+            function checkIfAllLoaded() {
+                // 如果两个图像都加载完成，则设置它们的尺寸并显示完整内容容器
+                if (imageLoaded && gifLoaded) {
+                    // 获取 GIF 的实际尺寸
+                    var gifWidth = fullGif_prompt.width;
+                    var gifHeight = fullGif_prompt.height;
+
+                    // 设置大图的宽度为 GIF 的宽度，并保持宽高比
+                    fullImage_prompt.style.width = gifWidth + 'px';
+                    fullImage_prompt.style.height = 'auto';
+
+                    // 显示完整内容容器
+                    fullContainer.classList.remove('hidden');
+                }
+            }
 
             // 将 Left Prompt 和 Right Prompt 分别显示在不同的行
             var gifTextParts = gifText.split('. Manual Prompt: ');
