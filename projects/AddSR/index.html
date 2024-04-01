@@ -144,9 +144,13 @@
 
 <head>
     <script>
-        // Function to preload GIF images
+        // 预加载 GIFs
         function preloadGIFs() {
             var gifPaths = [
+                'assets/gif/1.gif',
+                'assets/gif/2.gif',
+                'assets/gif/3.gif',
+                'assets/gif/5.gif',
                 'assets/results display/LR v.s. AddSR/1.gif',
                 'assets/results display/LR v.s. AddSR/2.gif',
                 'assets/results display/LR v.s. AddSR/3.gif',
@@ -162,8 +166,15 @@
             }
         }
 
-        // Preload GIFs when the page is loaded
-        window.onload = preloadGIFs;
+        // 页面加载时显示第一张预览图像对应的完整图像和GIF，并预加载其余 GIFs
+        window.onload = function() {
+            var firstPreviewImage = document.querySelector('.preview-image');
+            var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
+            var firstPreviewGifPath = firstPreviewImage.getAttribute('data-gif');
+
+            showFullContent('assets/gif/1.png', 'assets/gif/1.gif');
+            preloadGIFs();
+        };
     </script>
 </head>
 
@@ -533,31 +544,6 @@
             // 显示完整内容容器
             fullContainer.classList.remove('hidden');
         }
-
-        // 预加载 GIFs
-        function preloadGIFs() {
-            var gifPaths = [
-                'assets/gif/1.gif',
-                'assets/gif/2.gif',
-                'assets/gif/3.gif',
-                'assets/gif/5.gif'
-            ];
-
-            for (var i = 0; i < gifPaths.length; i++) {
-                var img = new Image();
-                img.src = gifPaths[i];
-            }
-        }
-
-        // 页面加载时显示第一张预览图像对应的完整图像和GIF，并预加载其余 GIFs
-        window.onload = function() {
-            var firstPreviewImage = document.querySelector('.preview-image');
-            var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
-            var firstPreviewGifPath = firstPreviewImage.getAttribute('data-gif');
-
-            showFullContent('assets/gif/1.png', 'assets/gif/1.gif');
-            preloadGIFs();
-        };
     </script>
 </body>
 </html>
