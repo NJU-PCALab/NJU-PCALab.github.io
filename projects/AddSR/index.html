@@ -511,7 +511,7 @@
                 </div>
                 <div class="col-md-1">
                     <img src="assets/gif/2.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/2.png', 'assets/gif/2.gig')">
+                        onclick="showFullContent('assets/gif/2.png', 'assets/gif/2.gif')">
                 </div>
             </div>
         </div>
@@ -531,10 +531,18 @@
             // 显示完整内容容器
             fullContainer.classList.remove('hidden');
         }
+
+        // 页面加载时显示第一张预览图像对应的完整图像和GIF
+        window.onload = function() {
+            var firstPreviewImage = document.querySelector('.preview-image');
+            var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
+            var firstPreviewGifPath = firstPreviewImage.getAttribute('data-gif'); // 如果有GIF，可以从data属性中获取
+
+            showFullContent(firstPreviewImagePath, firstPreviewGifPath);
+        };
     </script>
 </body>
 </html>
-
 <!-- Prompt-Guided Restoration End -->
 
     <br>
