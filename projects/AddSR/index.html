@@ -520,19 +520,19 @@
             <div class="row preview-container">
                 <div class="col-md-1">
                     <img src="assets/gif/1.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/1.png', 'assets/gif/1.gif')">
+                        onclick="showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Left Prompt: Person, man, selfie, stand. Right Prompt: Camouflage clothing.')">
                 </div>
                 <div class="col-md-1">
                     <img src="assets/gif/5.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/5.png', 'assets/gif/5.gif')">
+                        onclick="showFullContent('assets/gif/5.png', 'assets/gif/5.gif', 'Left Prompt: Forest, fungi, log, mushroom, tree, wood. Right Prompt: A mushroom is in the forest, and the background of the mushroom is blurred.')">
                 </div>
                 <div class="col-md-1">
                     <img src="assets/gif/3.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/3.png', 'assets/gif/3.gif')">
+                        onclick="showFullContent('assets/gif/3.png', 'assets/gif/3.gif', 'Left Prompt: Attach, building, hang, pole, sign, street sign, writing. Right Prompt: 24LC515.')">
                 </div>
                 <div class="col-md-1">
                     <img src="assets/gif/2.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/2.png', 'assets/gif/2.gif')">
+                        onclick="showFullContent('assets/gif/2.png', 'assets/gif/2.gif', 'Left Prompt: Man, muscle, shirt, shirtless, wear. Right Prompt: Spider-Man.')">
                 </div>
             </div>
         </div>
@@ -540,7 +540,7 @@
 
     <script>
         // JavaScript函数在点击预览图像时显示完整图像和GIF
-        function showFullContent(fullImagePath, fullGifPath) {
+        function showFullContent(fullImagePath, fullGifPath, gifText) {
             var fullContainer = document.getElementById('fullContainer');
             var fullImage_prompt = document.getElementById('fullImage_prompt');
             var fullGif_prompt = document.getElementById('fullGif_prompt');
@@ -573,9 +573,10 @@
             fullImage_text_prompt.innerText = 'LR';
 
             // 设置 GIF 下面的文字
-            fullGif_text_prompt.innerText = 'RAM Prompt vs. Manual Prompt';
+            fullGif_text_prompt.innerText = gifText;
         }
-        showFullContent('assets/gif/1.png', 'assets/gif/1.gif');
+        // 默认展示第一张图片
+        showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Left Prompt: Person, man, selfie, stand. Right Prompt: Camouflage clothing.');
     </script>
 </body>
 </html>
