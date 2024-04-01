@@ -671,6 +671,16 @@
             // 设置 GIF 下面的文字
             fullGif_text.innerText = 'SeeSR-Turbo-2 vs. AddSR-2';
 
+            // 获取大图和 GIF 的实际尺寸
+            var imageWidth = fullImage_turbo.width;
+            var imageHeight = fullImage_turbo.height;
+            var gifWidth = fullGif_turbo.width;
+            var gifHeight = fullGif_turbo.height;
+
+            // 设置大图和 GIF 的尺寸为相同的值
+            fullImage_turbo.style.width = gifWidth + 'px';
+            fullImage_turbo.style.height = gifHeight + 'px';
+
             // 显示完整内容容器
             fullContainer_turbo.classList.remove('hidden');
         }
