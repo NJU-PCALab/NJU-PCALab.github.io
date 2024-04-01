@@ -569,16 +569,15 @@
                 // 隐藏加载动画或者占位符
             };
 
-            // 设置大图下面的文字
-            fullImage_text_prompt.innerText = 'LR';
-
-            // 将 Right Prompt 的文字标红并设置到对应的元素中
+            // 将 Left Prompt 和 Right Prompt 分别显示在不同的行
             var gifTextParts = gifText.split('. Right Prompt: ');
+            fullImage_text_prompt.innerText = 'Left Prompt: ' + gifTextParts[0];
             fullGif_text_prompt.innerHTML = '<span style="color: red;">Right Prompt: ' + gifTextParts[1] + '</span>';
         }
         // 默认展示第一张图片
-        showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Left Prompt: Person, man, selfie, stand. Right Prompt: Camouflage clothing.');
+        showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Person, man, selfie, stand. Right Prompt: Camouflage clothing.');
     </script>
+
 </body>
 </html>
 <!-- Prompt-Guided Restoration End -->
