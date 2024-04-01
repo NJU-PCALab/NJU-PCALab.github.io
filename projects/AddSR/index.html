@@ -586,8 +586,14 @@
 
             // 将 Left Prompt 和 Right Prompt 分别显示在不同的行
             var gifTextParts = gifText.split('. Manual Prompt (Right): ');
-            fullImage_text_prompt.innerHTML = '<div style="text-align: center;">LR<br><br></div>';
-            fullGif_text_prompt.innerHTML = '<div style="text-align: center;">RAM Prompt (Left): ' + gifTextParts[0] + '</div><div style="text-align: center;">Manual Prompt (Right): <span style="color: red;">' + gifTextParts[1] + '</span></div>';
+            // 检查是否成功分割了字符串
+            if (gifTextParts.length === 2) {
+                // 如果成功分割，则设置左右提示
+                fullGif_text_prompt.innerHTML = '<div style="text-align: center;">RAM Prompt (Left): ' + gifTextParts[0] + '</div><div style="text-align: center;">Manual Prompt (Right): <span style="color: red;">' + gifTextParts[1] + '</span></div>';
+            } else {
+                // 如果未成功分割，则设置右侧提示为默认值
+                fullGif_text_prompt.innerHTML = '<div style="text-align: center;">RAM Prompt (Left): ' + gifText + '</div><div style="text-align: center;">Manual Prompt (Right): <span style="color: red;">No manual prompt provided</span></div>';
+            }
         }
         // 默认展示第一张图片
         showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Person, man, selfie, stand. Right Prompt: Camouflage clothing.');
