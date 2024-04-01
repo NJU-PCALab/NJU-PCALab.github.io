@@ -589,9 +589,11 @@
             // 检查是否成功分割了字符串
             if (gifTextParts.length === 2) {
                 // 如果成功分割，则设置左右提示
+                fullImage_text_prompt.innerHTML = '<div style="text-align: center;">LR<br><br></div>';
                 fullGif_text_prompt.innerHTML = '<div style="text-align: center;">RAM Prompt (Left): ' + gifTextParts[0] + '</div><div style="text-align: center;">Manual Prompt (Right): <span style="color: red;">' + gifTextParts[1] + '</span></div>';
             } else {
                 // 如果未成功分割，则设置右侧提示为默认值
+                fullImage_text_prompt.innerHTML = '<div style="text-align: center;">LR<br><br></div>';
                 fullGif_text_prompt.innerHTML = '<div style="text-align: center;">RAM Prompt (Left): ' + gifText + '</div><div style="text-align: center;">Manual Prompt (Right): <span style="color: red;">No manual prompt provided</span></div>';
             }
         }
