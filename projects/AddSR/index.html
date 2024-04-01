@@ -652,10 +652,14 @@
             var fullContainer_turbo = document.getElementById('fullContainer_turbo');
             var fullImage_turbo = document.getElementById('fullImage_turbo');
             var fullGif_turbo = document.getElementById('fullGif_turbo');
+            var turboCaption = document.getElementById('turboCaption');
 
             // 设置完整图像和GIF的来源
             fullImage_turbo.src = fullImagePath;
             fullGif_turbo.src = fullGifPath;
+
+            // 设置标题文字
+            turboCaption.textContent = "SeeSR-Turbo-2 vs. AddSR-2";
 
             // 显示完整内容容器
             fullContainer_turbo.classList.remove('hidden');
