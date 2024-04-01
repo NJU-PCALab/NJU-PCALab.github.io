@@ -485,17 +485,17 @@
             margin-top: 20px; /* 根据需要调整外边距 */
         }
 
-        #fullImage_prompt {
-            max-width: 100%; /* 让图片充满父容器 */
-            height: auto; /* 根据宽度自适应高度 */
+        #fullImage_prompt,
+        #fullGif_prompt {
+            max-width: 100%; /* 设置最大宽度为100%以确保大小一致 */
+            max-height: 400px; /* 设置最大高度，可以根据需要调整 */
             display: inline-block;
             margin-right: 10px; /* 根据需要调整外边距 */
         }
 
-        #fullGif_prompt {
-            max-width: 100%; /* 让图片充满父容器 */
-            height: auto; /* 根据宽度自适应高度 */
+        .fullContentWrapper {
             display: inline-block;
+            text-align: center; /* 确保文字位于左侧 */
         }
     </style>
 </head>
@@ -510,8 +510,14 @@
             </div>
             <!-- 完整图像和GIF的容器 -->
             <div id="fullContainer" class="hidden">
-                <img id="fullImage_prompt" src="" class="img-fluid">
-                <img id="fullGif_prompt" src="" class="img-fluid">
+                <div class="fullContentWrapper">
+                    <img id="fullImage_prompt" src="" class="img-fluid">
+                    <p id="fullImage_text_prompt">LR</p> <!-- 添加大图下面的文字 -->
+                </div>
+                <div class="fullContentWrapper">
+                    <img id="fullGif_prompt" src="" class="img-fluid">
+                    <p id="fullGif_text_prompt">RAM Prompt vs. Manual Prompt</p> <!-- 添加 GIF 下面的文字 -->
+                </div>
             </div>
             <!-- 预览图像 -->
             <div class="row preview-container">
@@ -541,10 +547,28 @@
             var fullContainer = document.getElementById('fullContainer');
             var fullImage_prompt = document.getElementById('fullImage_prompt');
             var fullGif_prompt = document.getElementById('fullGif_prompt');
+            var fullImage_text_prompt = document.getElementById('fullImage_text_prompt'); // 获取大图下面的文字元素
+            var fullGif_text_prompt = document.getElementById('fullGif_text_prompt'); // 获取 GIF 下面的文字元素
 
             // 设置完整图像和GIF的来源
             fullImage_prompt.src = fullImagePath;
             fullGif_prompt.src = fullGifPath;
+
+            // 设置大图下面的文字
+            fullImage_text_prompt.innerText = 'LR';
+
+            // 设置 GIF 下面的文字
+            fullGif_text_prompt.innerText = 'RAM Prompt vs. Manual Prompt';
+
+            // 获取大图和 GIF 的实际尺寸
+            var imageWidth = fullImage_prompt.width;
+            var imageHeight = fullImage_prompt.height;
+            var gifWidth = fullGif_prompt.width;
+            var gifHeight = fullGif_prompt.height;
+
+            // 设置大图和 GIF 的尺寸为相同的值
+            fullImage_prompt.style.width = gifWidth + 'px';
+            fullImage_prompt.style.height = gifHeight + 'px';
 
             // 显示完整内容容器
             fullContainer.classList.remove('hidden');
