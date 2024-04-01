@@ -522,19 +522,19 @@
             <div class="row preview-container">
                 <div class="col-md-1">
                     <img src="assets/gif/1.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Person, man, selfie, stand. Manual Prompt: Camouflage clothing.')">
+                        onclick="showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Person, man, selfie, stand. Manual Prompt (Right): Camouflage clothing.')">
                 </div>
                 <div class="col-md-1">
                     <img src="assets/gif/5.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/5.png', 'assets/gif/5.gif', 'Forest, fungi, log, mushroom, tree, wood. Manual Prompt: A mushroom is in the forest, and the background of the mushroom is blurred.')">
+                        onclick="showFullContent('assets/gif/5.png', 'assets/gif/5.gif', 'Forest, fungi, log, mushroom, tree, wood. Manual Prompt (Right): A mushroom is in the forest, and the background of the mushroom is blurred.')">
                 </div>
                 <div class="col-md-1">
                     <img src="assets/gif/3.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/3.png', 'assets/gif/3.gif', 'Attach, building, hang, pole, sign, street sign, writing. Manual Prompt: 24LC515.')">
+                        onclick="showFullContent('assets/gif/3.png', 'assets/gif/3.gif', 'Attach, building, hang, pole, sign, street sign, writing. Manual Prompt (Right): 24LC515.')">
                 </div>
                 <div class="col-md-1">
                     <img src="assets/gif/2.png" class="preview-image"
-                        onclick="showFullContent('assets/gif/2.png', 'assets/gif/2.gif', 'Man, muscle, shirt, shirtless, wear. Manual Prompt: Spider-Man.')">
+                        onclick="showFullContent('assets/gif/2.png', 'assets/gif/2.gif', 'Man, muscle, shirt, shirtless, wear. Manual Prompt (Right): Spider-Man.')">
                 </div>
             </div>
         </div>
@@ -585,9 +585,9 @@
             }
 
             // 将 Left Prompt 和 Right Prompt 分别显示在不同的行
-            var gifTextParts = gifText.split('. Manual Prompt: ');
+            var gifTextParts = gifText.split('. Manual Prompt (Right): ');
             fullImage_text_prompt.innerHTML = '<div style="text-align: center;">LR<br><br></div>';
-            fullGif_text_prompt.innerHTML = '<div style="text-align: center;">RAM Prompt: ' + gifTextParts[0] + '</div><div style="text-align: center;">Manual Prompt: <span style="color: red;">' + gifTextParts[1] + '</span></div>';
+            fullGif_text_prompt.innerHTML = '<div style="text-align: center;">RAM Prompt (Left): ' + gifTextParts[0] + '</div><div style="text-align: center;">Manual Prompt (Right): <span style="color: red;">' + gifTextParts[1] + '</span></div>';
         }
         // 默认展示第一张图片
         showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Person, man, selfie, stand. Right Prompt: Camouflage clothing.');
