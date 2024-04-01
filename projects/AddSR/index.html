@@ -549,76 +549,117 @@
 </html>
 <!-- Prompt-Guided Restoration End -->
 
+
     <br>
     <br>
     <br>
 
+
+<!-- Comparison with SeeSR-Turbo -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定性比较</title>
+    <style>
+        /* 添加CSS样式 */
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-container .col-md-1 {
+            flex: 0 0 auto;
+            margin: 5px; /* 根据需要调整外边距 */
+        }
+
+        .preview-image {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* 完整图像和GIF的样式 */
+        #fullContainer_turbo {
+            text-align: center;
+            margin-top: 20px; /* 根据需要调整外边距 */
+        }
+
+        #fullImage_turbo {
+            max-width: 100%; /* 让图片充满父容器 */
+            height: auto; /* 根据宽度自适应高度 */
+            display: inline-block;
+            margin-right: 10px; /* 根据需要调整外边距 */
+        }
+
+        #fullGif_turbo {
+            max-width: 100%; /* 让图片充满父容器 */
+            height: auto; /* 根据宽度自适应高度 */
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
     <section>
         <div class="container">
-            <div class="row">
+            <div class="row" style="margin-top: 5px;">
                 <div class="col-12 text-center">
-                    <h2>Comparison with SeeSR-Turbo</h2>
-                    <hr style="margin-top:0px">
+                    <h2>Prompt-Guided Restoration</h2>
+                    <hr style="margin-top: 0px;">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- 第一组数据 -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="assets/gif/179.png" alt="" style="width: 100%; height: auto;">
-                            <p class="text-center">LR</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-fluid" src="assets/gif/179.gif" alt="">
-                            <p class="text-center">SeeSR-Turbo-2 vs. AddSR-2</p> <!-- 添加提示，并居中显示 -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- 第二组数据 -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="assets/gif/130.png" alt="" style="width: 100%; height: auto;">
-                            <p class="text-center">LR</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-fluid" src="assets/gif/130.gif" alt="">
-                            <p class="text-center">SeeSR-Turbo-2 vs. AddSR-2</p> <!-- 添加提示，并居中显示 -->
-                        </div>
-                    </div>
-                </div>
+            <!-- 完整图像和GIF的容器 -->
+            <div id="fullContainer_turbo" class="hidden">
+                <img id="fullImage_turbo" src="" class="img-fluid">
+                <img id="fullGif_turbo" src="" class="img-fluid">
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- 第三组数据 -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="assets/gif/186.png" alt="" style="width: 100%; height: auto;">
-                            <p class="text-center">LR</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-fluid" src="assets/gif/186.gif" alt="">
-                            <p class="text-center">SeeSR-Turbo-2 vs. AddSR-2</p> <!-- 添加提示，并居中显示 -->
-                        </div>
-                    </div>
+            <!-- 预览图像 -->
+            <div class="row preview-container">
+                <div class="col-md-1">
+                    <img src="assets/gif/1.png" class="preview-image"
+                        onclick="showFullContent('assets/gif/040.png', 'assets/gif/040.gif')">
                 </div>
-                <div class="col-md-6">
-                    <!-- 第四组数据 -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="assets/gif/040.png" alt="" style="width: 100%; height: auto;">
-                            <p class="text-center">LR</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-fluid" src="assets/gif/040.gif" alt="">
-                            <p class="text-center">SeeSR-Turbo-2 vs. AddSR-2</p> <!-- 添加提示，并居中显示 -->
-                        </div>
-                    </div>
+                <div class="col-md-1">
+                    <img src="assets/gif/5.png" class="preview-image"
+                        onclick="showFullContent('assets/gif/130.png', 'assets/gif/130.gif')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/gif/3.png" class="preview-image"
+                        onclick="showFullContent('assets/gif/179.png', 'assets/gif/179.gif')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/gif/2.png" class="preview-image"
+                        onclick="showFullContent('assets/gif/186.png', 'assets/gif/186.gif')">
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        // JavaScript函数在点击预览图像时显示完整图像和GIF
+        function showFullContent(fullImagePath, fullGifPath) {
+            var fullContainer_turbo = document.getElementById('fullContainer_turbo');
+            var fullImage_turbo = document.getElementById('fullImage_turbo');
+            var fullGif_turbo = document.getElementById('fullGif_turbo');
+
+            // 设置完整图像和GIF的来源
+            fullImage_turbo.src = fullImagePath;
+            fullGif_turbo.src = fullGifPath;
+
+            // 显示完整内容容器
+            fullContainer_turbo.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
+<!-- Comparison with SeeSR-Turbo End -->
+
     <br>
     <br>
     <br>
