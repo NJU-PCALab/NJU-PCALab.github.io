@@ -568,7 +568,7 @@
             };
 
             // 将 Left Prompt 和 Right Prompt 分别显示在不同的行
-            var gifTextParts = gifText.split('. Right Prompt: ');
+            var gifTextParts = gifText.split('. Manual Prompt: ');
             fullImage_text_prompt.innerHTML = '<div style="text-align: center;">LR<br><br></div>';
             fullGif_text_prompt.innerHTML = '<div style="text-align: center;">RAM Prompt: ' + gifTextParts[0] + '</div><div style="text-align: center;">Manual Prompt: <span style="color: red;">' + gifTextParts[1] + '</span></div>';
         }
