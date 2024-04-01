@@ -556,11 +556,10 @@
                 // 获取 GIF 的实际尺寸
                 var gifWidth = fullGif_prompt.width;
                 var gifHeight = fullGif_prompt.height;
-
+    
                 // 设置大图的宽度为 GIF 的宽度，并保持宽高比
                 fullImage_prompt.style.width = gifWidth + 'px';
                 fullImage_prompt.style.height = 'auto';
-                fullImage_prompt.style.objectFit = 'contain';
 
                 // 显示完整内容容器
                 fullContainer.classList.remove('hidden');
@@ -569,7 +568,7 @@
             // 将 Left Prompt 和 Right Prompt 分别显示在不同的行
             var gifTextParts = gifText.split('. Right Prompt: ');
             fullImage_text_prompt.innerText = 'LR';
-            fullGif_text_prompt.innerHTML = '<span>Left Prompt: ' + gifTextParts[0] + '</span><br><span>Right Prompt: </span><span style="color: red;">' + gifTextParts[1] + '</span>';
+            fullGif_text_prompt.innerHTML = '<div style="text-align: left;">Left Prompt: ' + gifTextParts[0] + '</div><div style="text-align: left;">Right Prompt: <span style="color: red;">' + gifTextParts[1] + '</span></div>';
         }
         // 默认展示第一张图片
         showFullContent('assets/gif/1.png', 'assets/gif/1.gif', 'Person, man, selfie, stand. Right Prompt: Camouflage clothing.');
