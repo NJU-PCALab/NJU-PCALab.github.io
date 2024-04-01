@@ -175,9 +175,6 @@
             var firstPreviewImage = document.querySelector('.preview-image');
             var firstPreviewImagePath = firstPreviewImage.getAttribute('src');
             var firstPreviewGifPath = firstPreviewImage.getAttribute('data-gif');
-
-            showFullContent('assets/gif/1.png', 'assets/gif/1.gif');
-            showFullContent_turbo('assets/gif/040.png', 'assets/gif/040.gif');
             preloadGIFs();
         };
     </script>
@@ -578,6 +575,7 @@
             // 设置 GIF 下面的文字
             fullGif_text_prompt.innerText = 'RAM Prompt vs. Manual Prompt';
         }
+        showFullContent('assets/gif/1.png', 'assets/gif/1.gif');
     </script>
 </body>
 </html>
@@ -721,6 +719,7 @@
             // 设置 GIF 下面的文字
             fullGif_text.innerText = 'SeeSR-Turbo-2 vs. AddSR-2';
         }
+        showFullContent_turbo('assets/gif/040.png', 'assets/gif/040.gif');
     </script>
 </body>
 </html>
