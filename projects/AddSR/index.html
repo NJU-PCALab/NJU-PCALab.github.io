@@ -685,28 +685,36 @@
             var fullImage_text = document.getElementById('fullImage_text'); // 获取大图下面的文字元素
             var fullGif_text = document.getElementById('fullGif_text'); // 获取 GIF 下面的文字元素
 
+            // 添加加载动画或者占位符
+            // 例如，可以显示一个 loading.gif 图片
+
             // 设置完整图像和GIF的来源
             fullImage_turbo.src = fullImagePath;
             fullGif_turbo.src = fullGifPath;
+
+            // 监听图片加载完成事件
+            fullImage_turbo.onload = function() {
+                // 获取大图和 GIF 的实际尺寸
+                var imageWidth = fullImage_turbo.width;
+                var imageHeight = fullImage_turbo.height;
+                var gifWidth = fullGif_turbo.width;
+                var gifHeight = fullGif_turbo.height;
+
+                // 设置大图和 GIF 的尺寸为相同的值
+                fullImage_turbo.style.width = gifWidth + 'px';
+                fullImage_turbo.style.height = gifHeight + 'px';
+
+                // 显示完整内容容器
+                fullContainer_turbo.classList.remove('hidden');
+
+                // 隐藏加载动画或者占位符
+            };
 
             // 设置大图下面的文字
             fullImage_text.innerText = 'LR';
 
             // 设置 GIF 下面的文字
             fullGif_text.innerText = 'SeeSR-Turbo-2 vs. AddSR-2';
-
-            // 获取大图和 GIF 的实际尺寸
-            var imageWidth = fullImage_turbo.width;
-            var imageHeight = fullImage_turbo.height;
-            var gifWidth = fullGif_turbo.width;
-            var gifHeight = fullGif_turbo.height;
-
-            // 设置大图和 GIF 的尺寸为相同的值
-            fullImage_turbo.style.width = gifWidth + 'px';
-            fullImage_turbo.style.height = gifHeight + 'px';
-
-            // 显示完整内容容器
-            fullContainer_turbo.classList.remove('hidden');
         }
     </script>
 </body>
