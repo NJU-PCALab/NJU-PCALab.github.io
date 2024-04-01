@@ -432,76 +432,114 @@
     <br>
     <br>
 
+
+<!-- Prompt-Guided Restoration-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定性比较</title>
+    <style>
+        /* 添加CSS样式 */
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-container .col-md-1 {
+            flex: 0 0 auto;
+            margin: 5px; /* 根据需要调整外边距 */
+        }
+
+        .preview-image {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* 完整图像和GIF的样式 */
+        #fullContainer {
+            text-align: center;
+            margin-top: 20px; /* 根据需要调整外边距 */
+        }
+
+        #fullImage_prompt {
+            max-width: 45%; /* 根据需要调整大小 */
+            display: inline-block;
+            margin-right: 10px; /* 根据需要调整外边距 */
+        }
+
+        #fullGif_prompt {
+            max-width: 45%; /* 根据需要调整大小 */
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
     <section>
         <div class="container">
-            <div class="row">
+            <div class="row" style="margin-top: 5px;">
                 <div class="col-12 text-center">
                     <h2>Prompt-Guided Restoration</h2>
-                    <hr style="margin-top:0px">
+                    <hr style="margin-top: 0px;">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- 第一组数据 -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="assets/gif/1.png" alt="" style="width: 100%; height: auto;">
-                            <p class="text-center">HR</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-fluid" src="assets/gif/1.gif" alt="">
-                            <p class="text-center">RAM prompt vs. Manual prompt</p> <!-- 添加提示，并居中显示 -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- 第二组数据 -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="assets/gif/5.png" alt="" style="width: 100%; height: auto;">
-                            <p class="text-center">HR</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-fluid" src="assets/gif/5.gif" alt="">
-                            <p class="text-center">RAM prompt vs. Manual prompt</p> <!-- 添加提示，并居中显示 -->
-                        </div>
-                    </div>
-                </div>
+            <!-- 完整图像和GIF的容器 -->
+            <div id="fullContainer" class="hidden">
+                <img id="fullImage_prompt" src="" class="img-fluid">
+                <img id="fullGif_prompt" src="" class="img-fluid">
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- 第三组数据 -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="assets/gif/3.png" alt="" style="width: 100%; height: auto;">
-                            <p class="text-center">LR</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-fluid" src="assets/gif/3.gif" alt="">
-                            <p class="text-center">RAM prompt vs. Manual prompt</p> <!-- 添加提示，并居中显示 -->
-                        </div>
-                    </div>
+            <!-- 预览图像 -->
+            <div class="row preview-container">
+                <div class="col-md-1">
+                    <img src="assets/gif/1.png" class="preview-image"
+                        onclick="showFullContent('assets/gif/1.png', 'assets/gif/1.gif')">
                 </div>
-                <div class="col-md-6">
-                    <!-- 第四组数据 -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="assets/gif/2.png" alt="" style="width: 100%; height: auto;">
-                            <p class="text-center">LR</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-fluid" src="assets/gif/2.gif" alt="">
-                            <p class="text-center">RAM prompt vs. Manual prompt</p> <!-- 添加提示，并居中显示 -->
-                        </div>
-                    </div>
+                <div class="col-md-1">
+                    <img src="assets/gif/5.png" class="preview-image"
+                        onclick="showFullContent('assets/gif/5.png', 'assets/gif/5.gif')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/gif/3.png" class="preview-image"
+                        onclick="showFullContent('assets/gif/3.png', 'assets/gif/3.gif')">
+                </div>
+                <div class="col-md-1">
+                    <img src="assets/gif/2.png" class="preview-image"
+                        onclick="showFullContent('assets/gif/2.png', 'assets/gif/2.gig')">
                 </div>
             </div>
         </div>
     </section>
-    <br>
-    <br>
-    <br>
 
+    <script>
+        // JavaScript函数在点击预览图像时显示完整图像和GIF
+        function showFullContent(fullImagePath, fullGifPath) {
+            var fullContainer = document.getElementById('fullContainer');
+            var fullImage_prompt = document.getElementById('fullImage_prompt');
+            var fullGif_prompt = document.getElementById('fullGif_prompt');
+
+            // 设置完整图像和GIF的来源
+            fullImage_prompt.src = fullImagePath;
+            fullGif_prompt.src = fullGifPath;
+
+            // 显示完整内容容器
+            fullContainer.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
+
+<!-- Prompt-Guided Restoration End -->
+
+    <br>
+    <br>
+    <br>
 
     <section>
         <div class="container">
