@@ -554,24 +554,29 @@
             fullImage_prompt.src = fullImagePath;
             fullGif_prompt.src = fullGifPath;
 
+            // 监听图片加载完成事件
+            fullImage_prompt.onload = function() {
+                // 获取大图和 GIF 的实际尺寸
+                var imageWidth = fullImage_prompt.width;
+                var imageHeight = fullImage_prompt.height;
+                var gifWidth = fullGif_prompt.width;
+                var gifHeight = fullGif_prompt.height;
+
+                // 设置大图和 GIF 的尺寸为相同的值
+                fullImage_prompt.style.width = gifWidth + 'px';
+                fullImage_prompt.style.height = gifHeight + 'px';
+
+                // 显示完整内容容器
+                fullContainer.classList.remove('hidden');
+
+                // 隐藏加载动画或者占位符
+            };
+
             // 设置大图下面的文字
             fullImage_text_prompt.innerText = 'LR';
 
             // 设置 GIF 下面的文字
             fullGif_text_prompt.innerText = 'RAM Prompt vs. Manual Prompt';
-
-            // 获取大图和 GIF 的实际尺寸
-            var imageWidth = fullImage_prompt.width;
-            var imageHeight = fullImage_prompt.height;
-            var gifWidth = fullGif_prompt.width;
-            var gifHeight = fullGif_prompt.height;
-
-            // 设置大图和 GIF 的尺寸为相同的值
-            fullImage_prompt.style.width = gifWidth + 'px';
-            fullImage_prompt.style.height = gifHeight + 'px';
-
-            // 显示完整内容容器
-            fullContainer.classList.remove('hidden');
         }
     </script>
 </body>
