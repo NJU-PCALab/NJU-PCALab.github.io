@@ -596,17 +596,17 @@
             margin-top: 20px; /* 根据需要调整外边距 */
         }
 
-        #fullImage_turbo {
+        #fullImage_turbo,
+        #fullGif_turbo {
             max-width: 100%; /* 让图片充满父容器 */
             height: auto; /* 根据宽度自适应高度 */
             display: inline-block;
             margin-right: 10px; /* 根据需要调整外边距 */
         }
 
-        #fullGif_turbo {
-            max-width: 100%; /* 让图片充满父容器 */
-            height: auto; /* 根据宽度自适应高度 */
+        .fullContentWrapper {
             display: inline-block;
+            text-align: left; /* 确保文字位于左侧 */
         }
     </style>
 </head>
@@ -621,10 +621,14 @@
             </div>
             <!-- 完整图像和GIF的容器 -->
             <div id="fullContainer_turbo" class="hidden">
-                <img id="fullImage_turbo" src="" class="img-fluid">
-                <p id="fullImage_text">LR</p> <!-- 添加大图下面的文字 -->
-                <img id="fullGif_turbo" src="" class="img-fluid">
-                <p id="fullGif_text">SeeSR-Turbo-2 vs. AddSR-2</p> <!-- 添加 GIF 下面的文字 -->
+                <div class="fullContentWrapper">
+                    <img id="fullImage_turbo" src="" class="img-fluid">
+                    <p id="fullImage_text">LR</p> <!-- 添加大图下面的文字 -->
+                </div>
+                <div class="fullContentWrapper">
+                    <img id="fullGif_turbo" src="" class="img-fluid">
+                    <p id="fullGif_text">SeeSR-Turbo-2 vs. AddSR-2</p> <!-- 添加 GIF 下面的文字 -->
+                </div>
             </div>
             <!-- 预览图像 -->
             <div class="row preview-container">
@@ -673,7 +677,6 @@
     </script>
 </body>
 </html>
-
 <!-- Comparison with SeeSR-Turbo End -->
 
     <br>
