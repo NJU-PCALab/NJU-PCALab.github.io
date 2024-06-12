@@ -1,0 +1,206 @@
+/* Shangchen */
+.logo img {
+    width: 210px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #f00;
+}
+
+.logo img:hover {
+    width: 210px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #f00;
+}
+
+.container.is-max-desktop.head {
+    max-width: 95%;
+}
+
+.button.is-rounded:hover {
+    transform: scale(1.02);
+    background-color: #fb5a42;
+}
+
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 959px) {
+}
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+}
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+
+}
+
+.carousel {
+    display: none;
+  }
+  .carousel.active {
+    display: block;
+  }
+
+  .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .custom-table th, td {
+      border: 0px solid black;
+      padding: 1px;
+      text-align: left;
+    }
+    .custom-table thead th {
+      border-bottom: 3px solid black;
+    }
+    .custom-table tbody tr:first-child td {
+      border-top: 3px solid black;
+    }
+    .custom-table tbody tr {
+      border-bottom: 1px solid black;
+    }
+    .custom-table tbody tr:last-child td {
+      border-bottom: 3px solid black;
+    }
+    .custom-table tbody tr:nth-of-type(6) td {
+      border-top: 3px solid black;
+    }
+    .custom-table tbody tr:nth-of-type(10) td {
+      border-top: 3px solid black;
+    }
+    .custom-table thead {
+      border-top: 3px solid black; /* 表头上方的粗线 */
+    }
+
+    .custom-table2 {
+      width: 80%;
+      border-collapse: collapse;
+    }
+
+    .custom-table2 th, .custom-table2 td {
+      color: #E3E3E3;
+      border: 0px solid #E3E3E3;
+      padding: 8px;
+      text-align: center;
+    }
+    .custom-table2 thead th {
+      border-bottom: 3px solid #E3E3E3;
+    }
+    .custom-table2 tbody tr:first-child td {
+      border-top: 3px solid #E3E3E3;
+    }
+    .custom-table2 tbody tr {
+      border-bottom: 1px solid #E3E3E3;
+    }
+    .custom-table2 tbody tr:last-child td {
+      border-bottom: 3px solid #E3E3E3;
+    }
+    .custom-table2 tbody tr:nth-of-type(8) td {
+      border-top: 3px solid #E3E3E3;
+    }
+
+    .custom-table2 thead {
+      border-top: 3px solid #E3E3E3; /* 表头上方的粗线 */
+    }
+
+    /* 新增规则：去除第一列的左边框 */
+    .custom-table2 td:first-child,
+    .custom-table2 th:first-child {
+        border-left: none;
+    }
+
+    /* 新增规则：去除最后一列的右边框 */
+    .custom-table2 td:last-child,
+    .custom-table2 th:last-child {
+        border-right: none;
+    }
+
+    .custom-table3 {
+      width: 80%;
+      border-collapse: collapse;
+    }
+    .custom-table3 th, .custom-table3 td {
+      color: #E3E3E3;
+      border: 0px solid #E3E3E3;
+      padding: 8px;
+      text-align: left;
+    }
+    .custom-table3 thead th {
+      border-bottom: 3px solid #E3E3E3;
+    }
+    .custom-table3 tbody tr:first-child td {
+      border-top: 3px solid #E3E3E3;
+    }
+    .custom-table3 tbody tr {
+      border-bottom: 1px solid #E3E3E3;
+    }
+    .custom-table3 tbody tr:last-child td {
+      border-bottom: 3px solid #E3E3E3;
+    }
+    .custom-table3 tbody tr:nth-of-type(3) td {
+      border-top: 3px solid #E3E3E3;
+    }
+    .custom-table3 tbody tr:nth-of-type(6) td {
+      border-top: 3px solid #E3E3E3;
+    }
+    .custom-table3 tbody tr:nth-of-type(7) td {
+      border-top: 3px solid #E3E3E3;
+    }
+
+    .custom-table3 thead {
+      border-top: 3px solid #E3E3E3; /* 表头上方的粗线 */
+    }
+
+  /* 新增规则：去除第一列的左边框 */
+  .custom-table3 td:first-child,
+  .custom-table3 th:first-child {
+      border-left: none;
+  }
+
+  /* 新增规则：去除最后一列的右边框 */
+  .custom-table3 td:last-child,
+  .custom-table3 th:last-child {
+      border-right: none;
+  }
+
+  .custom-table4 {
+    width: 80%;
+    border-collapse: collapse;
+  }
+  .custom-table4 th, .custom-table4 td {
+    border: 0px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  .custom-table4 thead th {
+    border-bottom: 3px solid black;
+  }
+  .custom-table4 tbody tr:first-child td {
+    border-top: 3px solid black;
+  }
+  .custom-table4 tbody tr {
+    border-bottom: 1px solid black;
+  }
+  .custom-table4 tbody tr:last-child td {
+    border-bottom: 3px solid black;
+  }
+  .custom-table4 tbody tr:nth-of-type(4) td {
+    border-top: 3px solid black;
+  }
+
+  .custom-table4 thead {
+    border-top: 3px solid black; /* 表头上方的粗线 */
+  }
+
+/* 新增规则：去除第一列的左边框 */
+.custom-table3 td:first-child,
+.custom-table3 th:first-child {
+    border-left: none;
+}
+
+/* 新增规则：去除最后一列的右边框 */
+.custom-table3 td:last-child,
+.custom-table3 th:last-child {
+    border-right: none;
+}
+
+

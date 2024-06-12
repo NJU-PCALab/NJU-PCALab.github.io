@@ -1,1 +1,1424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description"
+              content="OpenVid-1M: A Large-Scale Dataset for High-Quality Text-to-Video Generation">
+        <meta name="keywords" content="Video Generation, Text-Video Dataset">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1"/> 
 
+        <title>OpenVid-1M:A Large-Scale Dataset for High-Quality Text-to-Video Generation</title>
+        <link rel="shortcut icon" href="assets\images\app-icon72x72@2x.png" type="image/x-icon">
+      
+        <link href="assets\css\Castoro.css"
+              rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/bauhaus-93" rel="stylesheet">
+        
+                
+      
+        <link rel="stylesheet" href="./assets/css/bulma.min.css">
+        <link rel="stylesheet" href="./assets/css/bulma-carousel.min.css">
+        <link rel="stylesheet" href="./assets/css/bulma-slider.min.css">
+        <link rel="stylesheet" href="./assets/css/fontawesome.all.min.css">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+        <link rel="stylesheet" href="./assets/css/index.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" >
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" >
+        <link rel="stylesheet" href="./assets/css/style.css" >
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      />
+
+        <script defer src="./assets/js/fontawesome.all.min.js"></script>
+        <script src="./assets/js/bulma-carousel.js"></script>
+        <script src="./assets/js/bulma-slider.js"></script>
+        <script src="./assets/js/index.js"></script>
+      
+        <!-- custom css file  -->
+        <link rel="stylesheet" href="./assets/css/twentytwenty.css">
+        <script src="assets\js\jquery.min.js"></script>
+
+        <style>
+            @import url('https://fonts.cdnfonts.com/css/bauhaus-93');
+
+        </style>
+
+
+      </head>
+<body>
+      <div id="loading">
+        <img src="assets/images/loading.gif" alt="Loading...">
+    </div>
+
+    <section class="banner">
+        <br><br><br><br>
+        <div class="hf-block">
+          <a href="assets\images\banner_high.png" title="High-resolution version background image">
+          <h1>OpenVid-1M</h1>
+          <h2>A Large-Scale Dataset for High-Quality Text-to-Video Generation</h2>
+          </a>
+        </div>
+        <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                  <a href="https://fantiehan.github.io/testvideo.github.io/" target="_blank">Kepan Nan</a><sup style="color: white;">1 *</sup>&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://fantiehan.github.io/testvideo.github.io/" target="_blank">Rui Xie</a><sup style="color: white;">1 *</sup>&nbsp;
+              </span>
+              <span class="author-block">
+                <a ahref="https://fantiehan.github.io/testvideo.github.io/" target="_blank">Penghao Zhou</a><sup style="color: white;">2 *</sup>&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://fantiehan.github.io/testvideo.github.io/" target="_blank">Tiehan Fan</a><sup style="color: white;">1</sup>&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://fantiehan.github.io/testvideo.github.io/" target="_blank">Zhenheng Yang</a><sup style="color: white;">2</sup>&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://fantiehan.github.io/testvideo.github.io/" target="_blank">Xiang Li</a><sup style="color: white;">3</sup>&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://fantiehan.github.io/testvideo.github.io/" target="_blank">Jian Yang</a><sup style="color: white;">4</sup>&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://fantiehan.github.io/testvideo.github.io/" target="_blank">Ying Tai</a><sup style="color: white;">1 <b><span style="font-family:Wingdings">*</span></b></sup>
+              </span>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+            <span class="author-block" style="color: white;"><sup>1</sup>NJU&ensp;</span>
+            <span class="author-block" style="color: white;"><sup>2</sup>TikTok&ensp;</span>
+            <span class="author-block" style="color: white;"><sup>3</sup>NKU&ensp;</span>
+            <span class="author-block" style="color: white;"><sup>4</sup>NUST&ensp;</span>
+          </div>
+
+        <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Paper Link. -->
+              <span class="link-block">
+                <a href="https://fantiehan.github.io/testvideo.github.io/" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/NJU-PCALab/openvideo" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/nankp/OpenVid-1M/tree/main"
+                    class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+            </div>
+        </div>
+
+        <!-- 底色为黄色的文本框 -->
+        <div class="TLDR">
+          <div class="l-TLDR">
+          <p style="color: black; font-size: 17px;"><span style="font-weight: bold;">TL;DR:</span> OpenVid-1M is a high-quality text-to-video dataset designed for research institutions to enhance <span style="color: rgb(188, 0, 0); ">video quality, featuring high aesthetics, clarity, and resolution</span>. It can be used for direct training or as a quality tuning complement to other video datasets.</p>
+          </div>
+        </div>
+        <br>
+      </section>
+
+    <!-- <section class="teaser-video">
+      <video preload="auto" muted controls autoplay="autoplay" loop="loop" poster="" id="tree"  width="" outline="0px" >                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+          <source src=""
+          type="video/mp4">
+      </video>
+    </section> -->
+
+
+    <section class="abstract">
+      <div class="abstract-container">
+        <h2 class="title is-3" style="color: #E3E3E3;">Abstract</h2>
+        <p style="color: #E3E3E3;">
+          Text-to-video (T2V) generation has recently garnered significant attention, largely due to the advanced multi-modality model, Sora. However, current T2V generation in research community still faces two major challenges: 1) The absence of a precise, high-quality open-source dataset. Previous popular video datasets, such as WebVid-10M and Panda-70M, are either of low quality or too large for most research institutions. Collecting precise, high-quality text-video pairs is both challenging and essential for T2V generation. 2) Inadequate utilization of textual information. Recent T2V methods focus on vision transformers, employing a simple cross-attention module for video generation, which falls short of thoroughly extracting semantic information from text prompt.
+          <br><br>
+          To address these issues, we introduce OpenVid-1M, a high-quality dataset with expressive captions. This open-scenario dataset comprises over 1 million text-video pairs, facilitating T2V generation research. Additionally, we curate 433K 1080p videos from OpenVid-1M to create OpenVidHD-0.4M, advancing high-definition video generation. Furthermore, we propose a novel Multi-modal Video Diffusion Transformer (MVDiT), capable of extracting structural information from visual tokens and semantic information from text tokens. Extensive experiments and ablation studies demonstrate the superiority of OpenVid-1M over previous datasets and the effectiveness of our MVDiT.
+        </p>
+        <br>
+      </div>
+    </section>
+
+    <!-- A set of 1024 video-->
+    <section class="video-set">
+      <div class="container">
+
+          <div class="section-title-h2 has-text-centered">
+            <br>
+            <h2>1024✖️1024 video results trained by OpenVid-1M</h2>
+            <br>
+          </div>
+
+
+          <div id="results-carousel" class="carousel2 results-carousel">
+            
+            <div class="hf-item item">
+              
+                <div class="video">
+                  <div class="desc-1">A small bird sits atop a blooming flower stem.</div>
+                  <video muted autoplay="autoplay" loop="loop" width="100%" >
+                  <source src="videos\Ours\0003.mp4" type="video/mp4">
+                  </video> 
+              </div>
+
+            </div>
+
+            <div class="hf-item item">
+              <div class="video">
+                <div class="desc-1">Pikachu snowboarding</div>
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0021.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+            
+            <div class="hf-item item">
+              <div class="video">
+                <div class="desc-1">A group of six tourists gazes at the mesmerizing Northern Lights in Iceland, awestruck by nature's beauty.</div>
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0149.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+
+            <div class="hf-item item">
+              <div class="video">
+                <div class="desc-1">Clear lake reflecting surrounding mountains.</div>
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0164.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+            
+            <div class="hf-item item">
+              <div class="video">
+                <div class="desc-1">a pumpkin car with a candle in it</div>
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0240.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+
+            <div class="hf-item item">
+              <div class="video">
+                <div class="desc-1">A cat watching the starry night by Vincent Van Gogh, Highly Detailed, 2K with the style of emoji</div>
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0265.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+
+            <div class="hf-item item">
+              <div class="video">
+                <div class="desc-1">impressionist style, a yellow rubber duck floating on the wave on the sunset</div>
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0266.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+
+            <div class="hf-item item">
+              <div class="video">
+                <div class="desc-1">Slow motion smoke curls up from a burning candle.</div>
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0595.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+
+          </div>
+      </div>
+      <br>
+    </section>
+<!-- End a set of 1024 video-->
+
+<!--Visual comparisons with SOTA models-->
+  <section class="video-set-twentytwenty">
+    <br>
+    <div class="container" style="max-width: 95%;">
+        <div class="section-title-h2 has-text-centered">
+          <h2 class="title is-3">Visual comparisons with SOTA models</h2>
+        </div>
+
+        <br>
+        <div class="button-group">
+          <button onclick="showSection(1)" class="custom-button active">Gen2<a href="#ref-Gen2"><sup>[1]</sup></a></button>
+          <button onclick="showSection(2)" class="custom-button">Pika<a href="#ref-Pika"><sup>[2]</sup></a></button>
+          <button onclick="showSection(3)" class="custom-button">VideoCrafter2<a href="#ref-VideoCrafter2"><sup>[3]</sup></a></button>
+          <button onclick="showSection(4)" class="custom-button">OpenSoraPlan-V1.1<a href="#ref-OpenSoraPlan-V1.1"><sup>[4]</sup></a></button>
+        </div>
+        <br>
+
+          <!-- gen2 -->
+          <div id="cp-carousel1" class="carousel results-carousel active">
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">camera rotate clockwise, several lily pads without frogs</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0511.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Gen2\0511.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">in goldfish glass</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0002.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Gen2\0002.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Two fish eating spaghetti on a subway</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0016.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Gen2\0016.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A spider spins a web, weaving intricate patterns with its silk.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0041.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Gen2\0041.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A serene river flowing gently under a rustic wooden bridge.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0161.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Gen2\0161.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Hailstones pelt an abandoned car in a barren field.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0236.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Gen2\0236.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Polaroid style, A red lobster in the sea.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0254.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Gen2\0254.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Slow motion sparks fly from a grinding wheel, creating a shower of light.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0601.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Gen2\0601.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+          
+
+        </div>
+
+        <!-- pika -->
+        <div id="cp-carousel2" class="carousel results-carousel">
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A curious cat peers from the window, watching the world outside.</div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0009.mp4" type="video/mp4">
+                </video> 
+              </div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Pika\0009.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+          </div>
+        
+          <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A photo of a Corgi dog riding a bike in Times Square. It is wearing sunglasses and a beach hat.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0030.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Pika\0030.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">fashion portrait shoot of a girl in colorful glasses, a breeze moves her hair</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0065.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Pika\0065.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Clear lake reflecting surrounding mountains.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0164.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Pika\0164.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">beer</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0226.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Pika\0226.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A cat watching the starry night by Vincent Van Gogh, Highly Detailed, 2K with the style of emoji</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0265.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Pika\0265.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">painting traditional Chinese In style, Beautiful green baby dinosaur dancing</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0269.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Pika\0269.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">zoom in, A serene river flowing gently under a rustic wooden bridge.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0473.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Pika\0473.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+          
+        
+        </div>
+
+        <!-- vc -->
+        <div id="cp-carousel3" class="carousel results-carousel">
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A crystal clear, deep ruby red wine fills a tall, tapered glass.</div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0186.mp4" type="video/mp4">
+                </video> 
+              </div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\VideoCrafter2\0186.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">a pumpkin car with a candle in it</div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0240.mp4" type="video/mp4">
+                </video> 
+              </div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\VideoCrafter2\0240.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A pointilism painting of A cute teddy bear with a friendly smile.</div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0270.mp4" type="video/mp4">
+                </video> 
+              </div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\VideoCrafter2\0270.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A spider spins a web, weaving intricate patterns with its silk.</div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0041.mp4" type="video/mp4">
+                </video> 
+              </div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\VideoCrafter2\0041.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+          </div>
+        
+          <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A warm golden sunset on the beach, with waves gently lapping the shore.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0160.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\VideoCrafter2\0160.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A serene river flowing gently under a rustic wooden bridge.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0161.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\VideoCrafter2\0161.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Juicy and sweet mangoes lying in a woven basket</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0216.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\VideoCrafter2\0216.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Polaroid style, A red lobster in the sea.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0254.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\VideoCrafter2\0254.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A gentleman with a handlebar mustache, a bowler hat, and a monocle.  with the style of oil painting</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0289.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\VideoCrafter2\0289.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+          
+        
+        </div>
+
+        <!-- osp -->
+        <div id="cp-carousel4" class="carousel results-carousel">
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">in goldfish glass</div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\Ours\0002.mp4" type="video/mp4">
+                </video> 
+              </div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="videos\OpenSoraPlan-V1.1\0002.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+          </div>
+        
+          <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A small bird sits atop a blooming flower stem.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0003.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\OpenSoraPlan-V1.1\0003.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">A curious cat peers from the window, watching the world outside.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0009.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\OpenSoraPlan-V1.1\0009.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Two fish eating spaghetti on a subway</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0016.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\OpenSoraPlan-V1.1\0016.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">fashion portrait shoot of a girl in colorful glasses, a breeze moves her hair</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0065.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\OpenSoraPlan-V1.1\0065.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Leaves falling in autumn forest</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0150.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\OpenSoraPlan-V1.1\0150.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Clear lake reflecting surrounding mountains.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0164.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\OpenSoraPlan-V1.1\0164.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+        
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+                <div class="desc">Hailstones pelt an abandoned car in a barren field.</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\Ours\0236.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="videos\OpenSoraPlan-V1.1\0236.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div> 
+          
+        
+        </div>
+
+        <p style="color: white; font-size: 18px; text-align:center">Please be patient for the videos to load.</p>
+        <br>
+      </div>
+  </section>
+
+<!--Video Statistics and Dataset Characteristics-->
+  <section class="results-block" style="background-color: #F5F5F5;">
+    
+    <br>
+    <div class="section-title-h2 has-text-centered">
+      <h2 class="title is-3">Video Statistics and Dataset Characteristics</h2>
+    </div>
+    <br>
+
+    <div style="display: flex;">
+      <div class="color-block b1">
+        <img src="assets\images\dataset_distribution.png" alt="dataset_distribution" style="width: 100%; border: 1px solid #000000;">
+        <br>
+        <div style="display: flex; align-items: center; justify-content: center; width: 90%;">
+        <p style="font-size: 18px;"><b>Comparisons on video statistics</b> between OpenVid-1M and Panda-50M.</p>
+        </div>
+      </div>
+    
+      <div class="color-block b2">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Scenario</th>
+              <th>Video clips</th>
+              <th>Aesthetics and Clarity</th>
+              <th>Resolution</th>
+              <th>Caption</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>UCF101</td>
+              <td>Action</td>
+              <td>13K</td>
+              <td>Low</td>
+              <td>320×240</td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>Taichi-HD</td>
+              <td>Human</td>
+              <td>3K</td>
+              <td>Low</td>
+              <td>256×256</td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>SkyTimelapse</td>
+              <td>Sky</td>
+              <td>35K</td>
+              <td>Medium</td>
+              <td>640×360</td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>FaceForensics++</td>
+              <td>Face</td>
+              <td>1K</td>
+              <td>Medium</td>
+              <td>Diverse</td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>WebVid</td>
+              <td>Open</td>
+              <td>10M</td>
+              <td>Low</td>
+              <td>596×336</td>
+              <td>Short</td>
+            </tr>
+            <tr>
+              <td>ChronoMagic</td>
+              <td>Metamorphic</td>
+              <td>2K</td>
+              <td>High</td>
+              <td>Diverse</td>
+              <td>Long</td>
+            </tr>
+            <tr>
+              <td>CelebvHQ</td>
+              <td>Portrait</td>
+              <td>35K</td>
+              <td>High</td>
+              <td>512×512</td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>OpenSoraPlan-V1.0</td>
+              <td>Open</td>
+              <td>400K</td>
+              <td>Medium</td>
+              <td>512×512</td>
+              <td>Long</td>
+            </tr>
+            <tr>
+              <td>Panda</td>
+              <td>Open</td>
+              <td>70M</td>
+              <td>Medium</td>
+              <td>Diverse</td>
+              <td>Short</td>
+            </tr>
+            <tr>
+              <td>OpenVid-1M(Ours)</td>
+              <td>Open</td>
+              <td>1M</td>
+              <td>High</td>
+              <td>Diverse</td>
+              <td>Long</td>
+            </tr>
+            <tr>
+              <td>OpenVidHD-0.4M(Ours)</td>
+              <td>Open</td>
+              <td>433K</td>
+              <td>High (1080P)</td>
+              <td>1920×1080</td>
+              <td>Long</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <div style="display: flex; align-items: center; justify-content: center; width: 95%;">
+        <p style="font-size: 18px;"><b>Comparisons with previous text-to-video datasets. </b>
+          Our OpenVid-1M is a <i>million-level, high-quality and open-scenario</i> video dataset for training high-fidelity text-to-video models.</p>
+        </div>
+        </div>
+    
+      <div class="color-block b3">
+        <img src="assets\images\video_clarity_distribution.png" alt="video_clarity_distribution" style="width: 100%; border: 1px solid #000000;">
+        <br>
+        <div style="display: flex; align-items: center; justify-content: center; width: 90%;">
+        <p style="font-size: 18px;"><b>Video clarity distribution of OpenVid-1M</b>. We also present 4 face samples to visualize the clarity differences. Faces outlined in <span style="color:green;">green</span> contour are blurry with low clarity scores, while those outlined in <span style="color:red;">red</span> contour are clearer with high clarity.</p>
+        </div>
+      </div>
+
+  </section>
+
+<!--Quantitative comparisons with SOTA models-->
+  <section class="results-block" style="background-color: #232323;">
+    <br>
+    <div class="section-title-h2 has-text-centered">
+      <h2 class="title is-3" style="color: #E3E3E3;">Quantitative comparisons with SOTA models</h2>
+    </div>
+    <br>
+
+    <div style="display: flex; flex-direction: row;  justify-content: center; align-items: center;">
+      <table class="custom-table2" style="color: #E3E3E3;">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Resolution</th>
+            <th>Training Data</th>
+            <th>VQA<sub>A</sub>↑</th>
+            <th>VQA<sub>T</sub>↑</th>
+            <th>Blip_bleu↑</th>
+            <th>SD_score↑</th>
+            <th>Clip_temp_score↑</th>
+            <th>Warping_error↓</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lavie<a href="#ref-Lavie"><sup>[5]</sup></a></td>
+            <td>512×320</td>
+            <td>Vimeo25M</td>
+            <td>63.77</td>
+            <td>42.59</td>
+            <td>22.38</td>
+            <td>68.18</td>
+            <td>99.57</td>
+            <td>0.0089</td>
+          </tr>
+          <tr>
+            <td>Show-1<a href="#ref-Show-1"><sup>[6]</sup></a></td>
+            <td>576×320</td>
+            <td>WebVid-10M</td>
+            <td>23.19</td>
+            <td>44.24</td>
+            <td>23.24</td>
+            <td>68.42</td>
+            <td>99.77</td>
+            <td>0.0067</td>
+          </tr>
+          <tr>
+            <td>OpenSora-V1.1<a href="#ref-OpenSora-V1.1"><sup>[9]</sup></a></td>
+            <td>512×512</td>
+            <td>Self collected-10M</td>
+            <td>22.04</td>
+            <td>23.62</td>
+            <td><b>23.60</b></td>
+            <td>67.66</td>
+            <td>99.66</td>
+            <td>0.0170</td>
+          </tr>
+          <tr>
+            <td>OpenSoraPlan-V1.1<a href="#ref-OpenSoraPlan-V1.1"><sup>[4]</sup></a></td>
+            <td>512×512</td>
+            <td>Self collected-4.8M</td>
+            <td>51.16</td>
+            <td>58.19</td>
+            <td>23.21</td>
+            <td>68.43</td>
+            <td><u>99.95</u></td>
+            <td><u>0.0026</u></td>
+          </tr>
+          <tr>
+            <td>Latte<a href="#ref-Latte"><sup>[7]</sup></a></td>
+            <td>512×512</td>
+            <td>Self collected-330K</td>
+            <td>55.46</td>
+            <td>48.93</td>
+            <td>22.39</td>
+            <td>68.06</td>
+            <td>99.59</td>
+            <td>0.0203</td>
+          </tr>
+          <tr>
+            <td>VideoCrafter<a href="#ref-VideoCrafter2"><sup>[3]</sup></a></td>
+            <td>1024×576</td>
+            <td>WebVid-10M; Laion-600M</td>
+            <td><u>66.18</u></td>
+          <td>58.93</td>
+          <td>22.17</td>
+          <td><b>68.73</b></td>
+          <td>99.78</td>
+          <td>0.0295</td>
+        </tr>
+        <tr>
+          <td>Modelscope<a href="#ref-Modelscope"><sup>[8]</sup></a></td>
+          <td>1280×720</td>
+          <td>Self collected-Billions</td>
+          <td>40.06</td>
+          <td>32.93</td>
+          <td>22.54</td>
+          <td>67.93</td>
+          <td>99.74</td>
+          <td>0.0162</td>
+        </tr>
+        <tr>
+          <td>Pika</td>
+          <td>1088×612</td>
+          <td>Unknown</td>
+          <td>59.09</td>
+          <td><u>64.96</u></td>
+          <td>21.14</td>
+          <td><u>68.57</u></td>
+          <td><b>99.97</b></td>
+          <td><b>0.0006</b></td>
+        </tr>
+        <tr>
+          <td>Ours</td>
+          <td>1024×1024</td>
+          <td>OpenVid-1M</td>
+          <td><b>73.46</b></td>
+          <td><b>68.58</b></td>
+          <td><u>23.45</u></td>
+          <td>68.04</td>
+          <td>99.87</td>
+          <td>0.0052</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <br>
+
+  </section>
+
+<!--Comparisons with previous representative text-to-video training datasets-->
+<section class="results-block" style="background-color: #F5F5F5;">
+  <br>
+  <div class="section-title-h2 has-text-centered">
+    <h2 class="title is-3" style="color: #363636;">Comparisons with previous representative text-to-video training datasets</h2>
+  </div>
+  <br>
+
+  <div style="display: flex; flex-direction: row;  justify-content: center; align-items: center;">
+    <table class="custom-table4">
+      <thead>
+        <tr>
+          <th>Resolution</th>
+          <th>Training Data</th>
+          <th>VQA<sub>A</sub>↑</th>
+          <th>VQA<sub>T</sub>↑</th>
+          <th>Blip_bleu↑</th>
+          <th>SD_score↑</th>
+          <th>Clip_temp_score↑</th>
+          <th>Warping_error↓</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>256×256</td>
+          <td>WebVid-10M<a href="#ref-WebVid-10M"><sup>[10]</sup></a></td>
+          <td>13.40</td>
+          <td>13.34</td>
+          <td>23.45</td>
+          <td>67.64</td>
+          <td>99.62</td>
+          <td>0.0138</td>
+        </tr>
+        <tr>
+          <td>256×256</td>
+          <td>Panda-50M<a href="#ref-Panda-50M"><sup>[11]</sup></a></td>
+          <td>17.08</td>
+          <td>9.60</td>
+          <td>24.06</td>
+          <td>67.47</td>
+          <td>99.60</td>
+          <td>0.0200</td>
+        </tr>
+        <tr>
+          <td>256×256</td>
+          <td>OpenVid-1M(Ours)</td>
+          <td>17.78</td>
+          <td>12.98</td>
+          <td><strong>24.93</strong></td>
+          <td>67.77</td>
+          <td>99.75</td>
+          <td>0.0134</td>
+        </tr>
+        <tr>
+          <td>1024×1024</td>
+          <td>WebVid-10M (4× Super-resolution)</td>
+          <td>69.26</td>
+          <td>65.74</td>
+          <td>23.15</td>
+          <td>67.60</td>
+          <td>99.64</td>
+          <td>0.0137</td>
+        </tr>
+        <tr>
+          <td>1024×1024</td>
+          <td>Panda-50M (4× Super-resolution)</td>
+          <td>63.25</td>
+          <td>53.21</td>
+          <td>23.60</td>
+          <td>67.44</td>
+          <td>99.57</td>
+          <td>0.0163</td>
+        </tr>
+        <tr>
+          <td>1024×1024</td>
+          <td>OpenVid-0.4M(Ours)</td>
+          <td><b>73.46</b></td>
+          <td><b>68.58</b></td>
+          <td>23.45</td>
+          <td><b>68.04</b></td>
+          <td><b>99.85</b></td>
+          <td>0.0132</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+</section>
+
+<!--Ablations on Resolutions, Architectures, and Training Data-->
+<section class="results-block" style="background-color: #232323;">
+  <br>
+  <div class="section-title-h2 has-text-centered">
+    <h2 class="title is-3" style="color: #F5F5F5;">Ablations on Resolutions, Architectures, and Training Data</h2>
+  </div>
+  <br>
+
+  <div style="display: flex; flex-direction: row;  justify-content: center; align-items: center;">
+    <table class="custom-table3"  style="color: #E3E3E3;">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Resolution</th>
+          <th>Training Data</th>
+          <th>Pretrained Weight</th>
+          <th>VQA<sub>A</sub>↑</th>
+          <th>VQA<sub>T</sub>↑</th>
+          <th>Blip_bleu↑</th>
+          <th>SD_score↑</th>
+          <th>Clip_temp_score↑</th>
+          <th>Warping_error↓</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>STDiT</td>
+          <td>256×256</td>
+          <td>Ours-0.4M</td>
+          <td>PixArt-α</td>
+          <td>11.11</td>
+          <td>12.46</td>
+          <td><b>24.55</b></td>
+          <td>67.96</td>
+          <td>99.81</td>
+          <td>0.0105</td>
+        </tr>
+        <tr>
+          <td>STDiT</td>
+          <td>512×512</td>
+          <td>Ours-0.4M</td>
+          <td>STDiT-256</td>
+          <td>65.15</td>
+          <td>59.57</td>
+          <td>23.73</td>
+          <td>68.24</td>
+          <td>99.80</td>
+          <td>0.0089</td>
+        </tr>
+        <tr style="background-color: #bfbfbfa9;">
+          <td>MVDiT</td>
+          <td>256×256</td>
+          <td>Ours-0.4M</td>
+          <td>PixArt-α</td>
+          <td>22.39</td>
+          <td>14.15</td>
+          <td>23.72</td>
+          <td>67.73</td>
+          <td>99.71</td>
+          <td>0.0091</td>
+        </tr>
+        <tr>
+          <td>MVDiT</td>
+          <td>256×256</td>
+          <td>OpenVid-1M</td>
+          <td>PixArt-α</td>
+          <td>24.87</td>
+          <td>14.57</td>
+          <td>24.01</td>
+          <td>67.64</td>
+          <td>99.75</td>
+          <td>0.0081</td>
+        </tr>
+        <tr>
+          <td>MVDiT</td>
+          <td>512×512</td>
+          <td>OpenVid-1M</td>
+          <td>MVDiT-256</td>
+          <td><b>66.65</b></td>
+          <td><b>63.96</b></td>
+          <td>24.14</td>
+          <td><b>68.31</b></td>
+          <td><b>99.83</b></td>
+          <td><b>0.0008</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+</section>
+
+  <section class="small" style="background-color: #F5F5F5; color: #232323;">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column custom-width">
+            <!-- <h2 class="title is-3"></h2> -->
+            <div class="content has-text-justified">
+              <p>
+                <a name="ref-Gen2" id="ref-Gen2"></a>
+                [1] Gen2 https://research.runwayml.com/gen2
+              </p>
+              <p>
+                <a name="ref-Pika" id="ref-Pika"></a>
+                [2] Pika https://pikalabs.org/
+              </p>
+              <p>
+              <a name="ref-VideoCrafter2" id="ref-VideoCrafter2"></a>
+              [3] VideoCrafter2 https://github.com/AILab-CVC/VideoCrafter
+            </p>
+            <p>
+            <a name="ref-OpenSoraPlan-V1.1" id="ref-OpenSoraPlan-V1.1"></a>
+            [4] OpenSoraPlan-V1.1 https://github.com/PKU-YuanGroup/Open-Sora-Plan
+          </p>
+          <p>
+          <a name="ref-Lavie" id="ref-Lavie"></a>
+            [5] Lavie https://github.com/Vchitect/LaVie
+          </p>
+          <p>  
+          <a name="ref-Show-1" id="ref-Show-1"></a>
+            [6] Show-1 https://github.com/showlab/Show-1
+          </p>
+          <p>
+            <a name="ref-Latte" id="Latte"></a>
+            [7] Latte https://github.com/Vchitect/Latte
+          </p>
+          <p>
+          <a name="ref-Modelscope" id="ref-Modelscope"></a>
+            [8] Modelscope https://github.com/modelscope/modelscope
+          </p>
+          <p>
+            <a name="ref-OpenSora-V1.1" id="ref-OpenSora-V1.1"></a>
+            [9] OpenSora-V1.1 https://github.com/hpcaitech/Open-Sora
+            </p>
+          <p>
+            <a name="ref-WebVid-10M" id="ref-WebVid-10M"></a>
+            [10] WebVid-10M Max Bain, Arsha Nagrani, Gül Varol, and Andrew Zisserman. Frozen in time: A joint video and image encoder for end-to-end retrieval. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 1728–1738, 2021.
+          </p>
+          <p>
+            <a name="ref-Panda-50M" id="ref-Panda-50M"></a>
+            [11] Panda-50M Tsai-Shien Chen, Aliaksandr Siarohin, Willi Menapace, Ekaterina Deyneka, Hsiang-wei Chao, Byung Eun Jeon, Yuwei Fang, Hsin-Ying Lee, Jian Ren, Ming-Hsuan Yang, et al Panda-70m: Captioning 70m videos with multiple cross-modality teachers. arXiv preprint arXiv:2402.19479, 2024.
+            </p>
+              
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div> 
+  </section>
+
+<!-- footer -->
+  <footer class="footer" style="background-color: #232323;">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p style="color: #F5F5F5;">
+              This website is licensed under a <a rel="license"
+                                                  href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p style="color: #F5F5F5;">
+              Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If you want to reuse their <a
+                href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them appropriately.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<!-- custom js file  -->
+<!-- <script defer src="./assets/js/fontawesome.all.min.js"></script> -->
+<script src="./assets/js/bulma-carousel.js"></script>
+<script src="./assets/js/bulma-slider.js"></script>
+<script src="./assets/js/index.js"></script>
+<script src="./assets/js/jquery.event.move.js"></script>
+<script src="./assets/js/jquery.twentytwenty.js"></script>
+<script>
+$(function(){
+  $(".twentytwenty-container").twentytwenty();
+  // $(".twentytwenty-container", "#results-carousel").twentytwenty({default_offset_pct: 0.5, ratio: 0.5});
+});
+
+var their_names=['Gen2','Pika','VideoCrafter2','OpenSoraPlan-V1.1'];
+
+
+function update_name(sectionNumber){
+  let their_name=their_names[sectionNumber-1];
+  $('.twentytwenty-after-label').each(function() {
+    $(this).attr("data-content", their_name);
+  });
+}
+
+function showSection(sectionNumber) {
+            // 隐藏所有 section 和 carousel
+            document.querySelectorAll('.carousel').forEach(function(carousel) {
+                carousel.classList.remove('active');
+            });
+
+            // 显示选中的 section 和 carousel
+            document.getElementById('cp-carousel' + sectionNumber).classList.add('active');
+
+
+            document.getElementById('cp-carousel' + sectionNumber).Function.reset();
+            $(window).trigger("resize.twentytwenty");
+            
+            update_name(sectionNumber);
+
+        }
+
+  document.querySelectorAll('.custom-button').forEach(button => {
+  button.addEventListener('click', function() {
+    // 移除所有按钮的.active类
+    document.querySelectorAll('.custom-button').forEach(btn => btn.classList.remove('active'));
+    // 为当前点击的按钮添加.active类
+    this.classList.add('active');
+  });
+});
+
+
+setTimeout(function() {
+        showSection(1);
+        document.getElementById('loading').style.display = 'none';
+    }, 3000);
+
+window.addEventListener('load', function() {
+  setTimeout(function() {
+        showSection(1);
+        document.getElementById('loading').style.display = 'none';
+    }, 200);
+
+    update_name(1);
+
+});
+
+</script>
+
+</body>
+
+</html>
