@@ -7,7 +7,7 @@ def crop_videos():
 
     for video in videos:
         # 构建FFmpeg命令
-        command = ['ffmpeg', '-i', video, '-vf', 'crop=504:504', 'resize_'+video, '-y']
+        command = ['ffmpeg', '-i', video, '-vf', 'crop=752:752', 'resize_'+video, '-y']
         # 执行FFmpeg命令
         subprocess.call(command)
         os.remove(video)

@@ -491,3 +491,9 @@ body, html {
   right: 0;
 }
 
+#lumaParagraph{
+  color: white; 
+  font-size: 18px; 
+  width: 80%;
+}
+
