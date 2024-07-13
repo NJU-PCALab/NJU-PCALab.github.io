@@ -346,11 +346,14 @@ body, html {
 }
 
 .teaser-video{
-  height: 55vh;
   background-color: rgb(42, 42, 42); 
   display: flex; /* 添加此行以启用Flexbox布局 */
   justify-content: center; /* 水平居中 */
   align-items: center; /* 垂直居中 */
+}
+
+.teaser-container {
+  width: 1024px;
 }
 
 .teaser-video video{
