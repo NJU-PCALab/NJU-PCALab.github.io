@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="STAR: Spatial-Temporal Augmentation with Text-to-Video Models for Real-World Video Super-Resolution">
+  <meta name="keywords" content="video super resolution, text-to-video, t2v, star">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STAR for Real-World Video Super-Resolution</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!--   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+
+  </script> -->
+  <style>
+    .hr {
+      width: 100%;
+      height: 1px;
+      margin: 48px 0;
+      background-color: #d6dbdf;
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/twentytwenty.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/foundation.min.css">
+  <!-- <link rel="stylesheet" href="./assets/css/all.min.css"> -->
+  <link rel="stylesheet" href="./assets/css/clarity.css">
+  <link rel="stylesheet" href="./assets/css/slider.css">
+  <!-- <link rel="stylesheet" href="./assets/css/main.free.css"> -->
+  <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./assets/js/fontawesome.all.min.js"></script>
+  <script src="./assets/js/video-control.js" defer></script>
+
+  <!-- <script src="./assets/js/bulma-carousel.min.js"></script>
+  <script src="./assets/js/bulma-slider.min.js"></script>
+  <script src="./assets/js/index.js"></script> -->
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop head">
+        <div class="columns is-centered">
+          <div class="column has-text-centered head">
+            <h1 class="title is-1 publication-title"
+              style="font-size:64px ;font-family: 'Georgia'; background: linear-gradient(to right, #FF6EC4, #9E6BF0, #7873F5, #34E2E2); display: inline-block; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              S T A R
+            </h1>
+            <h1 class="title is-2 publication-title">
+              <span style="color: #FF6EC4;font-size:52px">S</span>patial-<span
+                style="color: #9E6BF0;font-size:52px">T</span>emporal <span
+                style="color: #7873F5;font-size:52px">A</span>ugmentation with Text-to-Video Models for <span
+                style="color: #34E2E2;font-size:52px">R</span>eal-World Video Super-Resolution
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://github.com/CSRuiXie">Rui Xie</a><sup>1*</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://github.com/yhliu04">Yinhong Liu</a><sup>1*</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com.hk/citations?user=yWq1Fd4AAAAJ&hl=en">Penghao
+                  Zhou</a><sup>2</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=Uhp3JKgAAAAJ&hl=zh-CN&oi=sra">Chen
+                  Zhao</a><sup>1</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=WDPUUGUAAAAJ&hl=en">Jun
+                  Zhou</a><sup>3</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://cszn.github.io/">Kai Zhang</a><sup>1</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://jessezhang92.github.io/">Zhenyu Zhang</a><sup>1</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ&hl=en">Jian
+                  Yang</a><sup>1</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=Ds5wwRoAAAAJ">Zhenheng
+                  Yang</a><sup>2</sup>,&nbsp;&nbsp;</span>
+              <span class="author-block">
+                <a href="https://tyshiwo.github.io/">Ying Tai</a><sup>1&#8224</sup></span>
+            </div>
+
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Nanjing University, </span>
+              <span class="author-block"><sup>2</sup>ByteDance, </span>
+              <span class="author-block"><sup>3</sup>Southwest University</span>
+            </div>
+
+            <!-- <div class="is-size-5 publication-authors">
+            <span class="author-block">ICCV 2023</span>
+          </div> -->
+
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>*</sup>Equal contribution, </span>
+              <span class="author-block"><sup>&#8224</sup> Corresponding author</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <!-- <span class="link-block">
+                <a href="./xx.pdf" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+                <!-- arXiv Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2312.06640" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/sczhou/Upscale-A-Video" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Demo Link. -->
+                <!-- <span class="link-block">
+                <a href="https://huggingface.co/spaces/sczhou/ProPainter" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <img src="./assets/images/hf.png">
+                  </span>
+                  <span>Demo</span>
+                </a>
+              </span> -->
+
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://youtu.be/hx0zrql-SrU" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+
+      <div class="columns is-centered">
+
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">Visual Effects</h2>
+            <p>
+              Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
+              would be impossible without nerfies since it would require going through a wall.
+            </p>
+            <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/dollyzoom-stacked.mp4"
+                      type="video/mp4">
+            </video>
+            <div class="item">
+              <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+                <div class="desc">AIGC Video</div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                    <source src="./assets/videos/trump_lq.mp4" type="video/mp4">
+                  </video> 
+                </div>
+                <div class="video">
+                  <video muted autoplay="autoplay" loop="loop" width="100%">
+                    <source src="./assets/videos/trump_out.mp4" type="video/mp4">
+                  </video> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <h2 class="title is-3">Matting</h2>
+          <div class="columns is-centered">
+            <div class="column content">
+              <p>
+                As a byproduct of our method, we can also solve the matting problem by ignoring
+                samples that fall outside of a bounding box during rendering.
+              </p>
+              <video id="matting-video" controls playsinline height="100%">
+                <source src="./assets/videos/matting.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+  <!-- first row -->
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3">Real-World Videos (upscale &times4)</h2>
+      </div>
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+              <div class="desc">from Bilibili</div>
+              <div class="video">
+                <video preload="auto" autoplay="autoplay" muted loop width="100%">
+                  <source src="./assets/videos/aptlq.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video">
+                <video preload="auto" autoplay="autoplay" muted loop="loop" width="100%">
+                  <source src="./assets/videos/apt_out2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+              <div class="desc">from VideoLQ</div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/016_lq.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/016_ours.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+              <div class="desc">from Bilibili</div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/animallq.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/animal_ours2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+              <div class="desc">from VideoLQ</div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/007_lq.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/007_ours.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3">AIGC Videos (upscale &times4)</h2>
+      </div>
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+              <div class="desc">from Kling</div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/031_klingai_reedit_lq.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/031_klingai_reedit_ours2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+              <div class="desc">from CogvideoX</div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/009_CogVideoX_lq.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/009_CogVideoX_ours.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+              <div class="desc">from Kling</div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/023_klingai_reedit_lq.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/023_klingai_reedit_ours2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5625">
+              <div class="desc">from Cogvideo</div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/001_CogVideo_lq.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video">
+                <video preload="auto" muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/001_CogVideo_ours2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </section>
+
+
+  <section class="teaser" style="font-family: 'Comic Sans MS', 'Comic Sans', cursive; font-size: 20px;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <!-- <div class="column is-four-fifths"> -->
+        <div class="column">
+          <div class="content has-text-justified">
+            <div class="content" style="text-align: center;">
+              <br>
+              <b>STAR</b> is a Spatio-Temporal quality Augmentation framework for Real-world VSR,
+              <br>
+              which is the <span
+                style="color: #EA4335; border-bottom: 2px solid #EA4335; display: inline-block;">first</span></b> to
+              integrate diverse, powerful text-to-video diffusion priors into real-world VSR.
+            </div>
+            <div class="hr"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <!-- <div class="column"> -->
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Image diffusion models have been adapted for real-world video super-resolution to tackle over-smoothing
+              issues in GAN-based methods.
+              However, these models struggle to maintain temporal consistency, as they are trained on static images,
+              limiting their ability to capture temporal dynamics effectively.
+              Integrating text-to-video (T2V) models into video super-resolution for improved temporal modeling is
+              straightforward.
+              However, two key challenges remain: artifacts introduced by complex degradations in real-world scenarios,
+              and compromised fidelity due to the strong generative capacity of powerful T2V models (e.g.,
+              CogVideoX-5B).
+              To enhance the spatio-temporal quality of restored videos, we introduce <b>STAR</b>
+              (<b>S</b>patial-<b>T</b>emporal <b>A</b>ugmentation with T2V models for <b>R</b>eal-world video
+              super-resolution), a novel approach that leverages T2V models for real-world video super-resolution,
+              achieving realistic spatial details and robust temporal consistency.
+              Specifically, we introduce a Local Information Enhancement Module (LIEM) before the global attention block
+              to enrich local details and mitigate degradation artifacts.
+              Moreover, we propose a Dynamic Frequency (DF) Loss to reinforce fidelity, guiding the model to focus on
+              different frequency components across diffusion steps.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <!-- <div class="column is-four-fifths"> -->
+        <div class="column">
+          <h2 class="title is-3">Method</h2>
+          <div class="content has-text-justified">
+            <p>
+              STAR includes four modules: VAE, text encoder, ControlNet, and T2V model with <b>Local Information
+                Enhancement Module (LIEM)</b> designed to alleviate the artifacts.
+              <b>Dynamic Frequency (DF) Loss</b> is introduced to adaptively adjust the constraint on high- and
+              low-frequency components across diffusion steps.
+              With the proposed LIEM and DF loss, STAR achieves high spatio-temporal quality, reduced artifacts and
+              enhanced fidelity.
+            </p>
+            <div class="column">
+              <img src="./assets/images/overview_01.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper video. -->
+  <div id="spotlight-video">
+    <div class="container is-max-desktop">
+      <div class="column is-centered has-text-centered">
+        <h2 class="title is-3">
+          <span class="a">STAR</span>
+          <span class="b">Demo</span>
+        </h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/hx0zrql-SrU?rel=0&amp;showinfo=0" frameborder="0"
+            allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="hero">
+    <div class="hero-body">
+
+      <div class="columns is-centered has-text-centered">
+        <!-- <div class="column is-four-fifths"> -->
+        <div class="column">
+          <h2 class="title is-3">Comparison with SOTA</h2>
+          <div class="title is-4">
+            <p>
+              Quantitative Comparison
+            </p>
+            <div class="column">
+              <img src="./assets/images/comparison.png" />
+            </div>
+          </div>
+
+          <div class="title is-4">
+            <p>
+              Qualitative Comparison
+            </p>
+          </div>
+
+          <!-- <div class="title is-4">
+          <p>
+            VideoLQ
+          </p>
+        </div> -->
+          <style>
+            .card-img {
+              border: 2px solid #c1bfbf;
+              border-radius: 8px;
+              padding: 2px;
+              display: inline-block;
+              transition: transform 0.3s ease-in-out;
+              transform-origin: center center;
+            }
+
+            .card-img:active {
+              transform: scale(1.2);
+            }
+          </style>
+
+          <style>
+            .hidden {
+              display: none;
+            }
+          </style>
+
+
+          <div class="container blog extra-large white">
+            <div class="slide-menu" style="margin-bottom: 60px;">
+              <ul class="dots" id="slide-menu-2"
+                style="display: flex; justify-content: center; gap: 70px; flex-wrap: wrap;">
+                <li class="dot active" data-slide="0"><img class="card-img" src="./assets/images/gt005.png"
+                    alt="Slide 1" style="width: 80px; height: 50px;"></li>
+                <li class="dot" data-slide="1"><img class="card-img" src="./assets/images/gt006.png" alt="Slide 2"
+                    style="width: 80px; height: 50px;"></li>
+                <li class="dot" data-slide="2"><img class="card-img" src="./assets/images/gt008.png" alt="Slide 3"
+                    style="width: 80px; height: 50px;"></li>
+                <li class="dot" data-slide="3"><img class="card-img" src="./assets/images/gt016.png" alt="Slide 4"
+                    style="width: 80px; height: 50px;"></li>
+              </ul>
+            </div>
+
+            <div class="slide-content" data-slide="0" style="display: block;">
+              <div class="columns-4">
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="98%">
+                    <source src="./assets/videos/uav005.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">Upscale-A-Video<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/mgld005.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">MGLDVSR<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/rvf005.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">RealViformer<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/ours005.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">Ours<figcaption>
+                  </b>
+                </figure>
+              </div>
+            </div>
+
+            <div class="slide-content" data-slide="1" style="display: none;">
+              <div class="columns-4">
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/uav006.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">Upscale-A-Video<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/mgld006.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">MGLDVSR<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/rvf006.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">RealViformer<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/ours006.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">Ours<figcaption>
+                  </b>
+                </figure>
+              </div>
+            </div>
+
+            <div class="slide-content" data-slide="2" style="display: none;">
+              <div class="columns-4">
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/uav008.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">Upscale-A-Video<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/mgld008.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">MGLDVSR<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/rvf008.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">RealViformer<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/ours008.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">Ours<figcaption>
+                  </b>
+                </figure>
+              </div>
+            </div>
+
+            <div class="slide-content" data-slide="3" style="display: none;">
+              <div class="columns-4">
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/uav016.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">Upscale-A-Video<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/mgld016.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">MGLDVSR<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/rvf016.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">RealViformer<figcaption>
+                  </b>
+                </figure>
+                <figure style="text-align: center;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                    <source src="./assets/videos/ours016.mp4" type="video/mp4">
+                  </video>
+                  <b>
+                    <figcaption style="margin-top: 8px; ">Ours<figcaption>
+                  </b>
+                </figure>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+  </section>
+
+
+  <script>
+    // JavaScript for slide switching
+    document.querySelectorAll('.slide-menu').forEach(menu => {
+      menu.querySelectorAll('.dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          const slideIndex = dot.getAttribute('data-slide');
+          const container = menu.parentElement;
+
+          // Remove 'active' class from all dots and add to the clicked dot
+          menu.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+          dot.classList.add('active');
+
+          // Hide all slides and show the selected one
+          container.querySelectorAll('.slide-content').forEach(slide => {
+            slide.style.display = slide.getAttribute('data-slide') === slideIndex ? 'block' : 'none';
+          });
+        });
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll('.dots .dot').forEach(function (dot) {
+        if (dot.querySelector('img')) {
+          dot.style.background = 'none';
+          dot.style.border = 'none';
+        }
+      });
+    });
+  </script>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@InProceedings{
+    }</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://arxiv.org/abs/2312.06640" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/sczhou/Upscale-A-Video" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a class="icon-link" href="https://youtu.be/hx0zrql-SrU" target="_blank">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <div class="columns is-centered">
+              <p>
+                This website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io"
+                  target="_blank">Nerfies</a> and <a href="https://shangchenzhou.com/projects/upscale-a-video/"
+                  target="_blank">Upscale-A-Video</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="columns is-centered">
+        <div class="content">
+          <a href="https://hits.seeyoufarm.com"><img
+              src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fnju-pcalab.github.io%2Fprojects%2FSTAR%2F&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false" /></a>
+        </div>
+      </div>
+      <!--=================Visitor==========================-->
+      <!-- <div class="content has-text-centered" style="padding:0 0 0 0">
+      <img src='https://api.infinitescript.com/badgen/count?name=NJU-PCALab/RAG-Diffusion&ltext=Visitors&color=3977dd' alt='visitors'>
+    </div> -->
+
+    </div>
+
+  </footer>
+
+  <!-- custom js file  -->
+  <!-- <script defer src="./assets/js/fontawesome.all.min.js"></script> -->
+  <script src="./assets/js/bulma-carousel.min.js"></script>
+  <script src="./assets/js/bulma-slider.min.js"></script>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/jquery.event.move.js"></script>
+  <script src="./assets/js/jquery.twentytwenty.js"></script>
+  <script>
+    $(function () {
+      $(".twentytwenty-container").twentytwenty();
+      // $(".twentytwenty-container", "#results-carousel").twentytwenty({default_offset_pct: 0.5, ratio: 0.5});
+    });
+  </script>
+</body>
+
+</html>
