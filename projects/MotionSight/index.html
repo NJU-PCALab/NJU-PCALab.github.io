@@ -269,6 +269,28 @@
       .hero-section {
         padding-top: 80px;
       }
+
+      /* Fix for mobile banner display */
+      .site-header {
+        position: absolute;
+        height: auto;
+      }
+
+      .main-nav {
+        padding: 0.5rem 0;
+      }
+
+      /* Fix for all sections to properly respect header on mobile */
+      section {
+        padding-top: 30px !important;
+      }
+
+      /* Fix for footer credits */
+      .credit {
+        white-space: normal;
+        font-size: 14px;
+        line-height: 1.4;
+      }
     }
     
     /* Override any existing navbar styles */
@@ -592,7 +614,7 @@ year={2025}
         <div class="columns is-centered">
           <div class="column is-8 has-text-centered">
             <div class="content">
-              <p class="credit">The source code of this webpage is based on the <a href="https://github.com/nerfies/nerfies.github.io/">Nerfies</a>, <a href="https://showlab.github.io/VideoGUI/">VideoGUI</a> and <a href="https://describe-anything.github.io/">Describe Anything</a>.</p>
+              <p class="credit" style="word-wrap: break-word; overflow-wrap: break-word;">The source code of this webpage is based on the <a href="https://github.com/nerfies/nerfies.github.io/">Nerfies</a>, <a href="https://showlab.github.io/VideoGUI/">VideoGUI</a> and <a href="https://describe-anything.github.io/">Describe Anything</a>.</p>
             </div>
           </div>
         </div>
