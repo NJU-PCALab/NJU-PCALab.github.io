@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- <meta name="description"
+        content="HyperNeRF handles topological variations by modeling a family of shapes in a higher-dimensional space, thereby producing more realistic renderings and more accurate geometric reconstructions.">
+  <meta name="keywords" content="HyperNeRF, Nerfies, D-NeRF, NeRF"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="image_src" href="./static/images/thumbnail.png"> -->
+  <!-- <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.png"/> -->
+  <link rel="icon" type="image/x-icon" href="assets/motionsight.png">
+
+
+  <title>MotionSight</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EDF010G6PN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EDF010G6PN');
+
+
+  </script>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts - Varela Round and Open Sans (matching describe-anything design) -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Varela+Round&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css" />
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <!-- Custom CSS to match describe-anything design -->
+  <style>
+    :root {
+      --primary-color: #000;
+      --secondary-color: #333;
+      --accent-color: #667eea;
+      --text-color: #2d3748;
+      --light-text: #4a5568;
+      --background-color: #ffffff;
+      --light-bg: #f7fafc;
+      --border-color: #e2e8f0;
+      --shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.1), 0 5px 20px 0px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+      background-color: var(--background-color);
+      font-size: 17px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Varela Round', sans-serif;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h2:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -15px;
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      border-radius: 3px;
+      box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 5px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .nav-links a:hover:after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--accent-color);
+    }
+    
+    .nav-links a.active:after {
+      width: 100%;
+      background-color: var(--accent-color);
+    }
+
+    .hero-section {
+      padding-top: 100px;
+      padding-bottom: 2rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .title-row {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .author-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .author-col {
+      margin: 0 15px;
+      text-align: center;
+    }
+
+    .image-container {
+      margin: 2rem 0;
+      padding: 1rem;
+      position: relative;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      background-color: white;
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .image-container:hover {
+      box-shadow: 0 10px 30px 0px rgba(0, 0, 0, 0.25), 0 10px 15px 0px rgba(0, 0, 0, 0.15);
+    }
+
+    .section {
+      margin-top: 5rem;
+      padding: 0;
+    }
+
+    .tldr {
+      background-color: var(--light-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 2rem 0;
+      box-shadow: var(--shadow);
+      font-size: 1.2rem;
+      color: var(--light-text);
+      line-height: 1.6;
+    }
+
+    .site-footer {
+      background-color: var(--light-bg);
+      padding: 2rem 0;
+      margin-top: 4rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      .hero-section {
+        padding-top: 80px;
+      }
+    }
+    
+    /* Override any existing navbar styles */
+    .navbar {
+      display: none;
+    }
+
+    .columns.is-centered {
+      text-align: center;
+    }
+    
+    .columns.is-centered h2 {
+      display: inline-block;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .image-caption {
+      font-size: 1.2rem;
+      color: #f97316; /* Orange color */
+      text-align: center;
+      margin-top: 1rem;
+      font-style: italic;
+      line-height: 1.5;
+      opacity: 1;
+    }
+    
+    .image-caption strong {
+      font-weight: 600;
+      color: #f97316; /* Orange color */
+    }
+    
+    .image-caption a {
+      color: #f97316; /* Orange color */
+      text-decoration: none;
+      border-bottom: 1px dotted #f97316;
+      transition: all 0.2s ease;
+    }
+    
+    .image-caption a:hover {
+      border-bottom: 1px solid #f97316;
+      opacity: 0.8;
+    }
+
+    .author-block a {
+      color: var(--text-color);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .author-block a:hover {
+      color: var(--accent-color);
+    }
+    
+    .author-block a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+    
+    .author-block a:hover::after {
+      width: 100%;
+    }
+
+    .credit {
+      white-space: nowrap;
+      width: 100%;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Original navbar is hidden by CSS, replaced with the new one below -->
+  <ul class="navbar" id="navbar">
+    <li><a href="#home"><img src="assets/motionsight.png" alt="Home"
+          style="height:30px; width:30px; vertical-align:middle; margin-right:5px;"> <strong>MotionSight</strong> </a>
+    </li>
+  </ul>
+
+  <!-- New header based on describe-anything design -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#challenges">Challenges</a></li>
+          <li><a href="#pipeline">Pipeline</a></li>
+          <li><a href="#data-statistic">Data</a></li>
+          <li><a href="#results">Examples</a></li>
+          <li><a href="#main-results">Results</a></li>
+          <li><a href="#BibTeX">Citation</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero section (title and authors) -->
+  <div class="hero-section" id="home">
+    <div class="container">
+      <div class="title-row">
+        <h1 class="title text-4xl md:text-5xl font-bold mb-4">
+          <img src="assets/motionsight.png" alt="Home" class="inline-block h-10 w-10 align-middle mr-2">
+          <span class="gradient-text">MotionSight</span>: Boosting Fine-Grained Motion Understanding in Multimodal LLMs
+        </h1>
+      </div>
+      <!-- Preserve the original authors content but with larger font size -->
+      <div class="author-row">
+        <span class="author-block text-xl">
+          <a href="https://github.com/natsunoshion">Yipeng Du*</a><sup>&#9825;</sup>,</span>
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=F11LXvYAAAAJ&hl=en">Tiehan Fan*</a><sup>&#9825;</sup>,</span>
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=PXmlku8AAAAJ&hl=en">Kepan Nan</a><sup>&#9825;&#9824;</sup>,</span>
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=Dzr3D_EAAAAJ&hl=en">Rui Xie</a><sup>&#9825;&#9824;</sup>,</span>
+      </div>
+      <div class="author-row">
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=yWq1Fd4AAAAJ&hl=zh-CN">Penghao Zhou</a><sup>&#9824;</sup>,</span>
+        <span class="author-block text-xl">
+          <a href="https://implus.github.io/">Xiang Li</a><sup>&#9826;</sup>,</span>
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=6CIDtZQAAAAJ&&hl=en">Jian Yang</a><sup>&#9825;</sup>,</span>
+          <span class="author-block text-xl">
+          <a href="https://zhenheny.github.io/">Zhengheng Yang</a><sup>&#9824;</sup>,</span>
+        <span class="author-block text-xl">
+          <a href="https://tyshiwo.github.io/">Ying Tai</a><sup>&#9825;</sup></span>
+        <a href="mailto:yingtai@nju.edu.cn" class="ml-3 text-gray-500 hover:text-accent-color transition-all">
+          <i class="fas fa-envelope text-xl"></i>
+        </a>
+      </div>
+
+      <div class="author-row">
+        <span class="author-block text-lg">
+          <sup>&#9825;</sup>Nanjing University,</span>
+        <span class="author-block text-lg">
+          <sup>&#9824;</sup>ByteDance</span>
+        <span class="author-block text-lg">
+          <sup>&#9826;</sup>Nankai University</span>
+      </div>
+
+      <div class="flex flex-wrap justify-center mt-8 gap-10" style="max-width: 800px; margin: 0 auto;">
+        <a href="https://arxiv.org/abs/2406.10227" class="flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="ai ai-arxiv text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Paper</strong>
+        </a>
+        <a href="https://github.com/NJU-PCALab/MotionSight" class="flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="fab fa-github text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Code</strong>
+        </a>
+        <!-- <a href="https://www.youtube.com/watch?v=8M3LCiBm_iQ" class="flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="fab fa-youtube text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Demo <span class="text-sm text-red-500">(coming soon)</span></strong>
+        </a> -->
+        <a href="https://huggingface.co/datasets/MotionSight/MotionVid-QA" class="flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="fas fa-database text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Dataset <span class="text-sm text-red-500">(coming soon)</span></strong>
+        </a>
+      </div>
+
+      <!-- TL;DR moved below icons as requested -->
+      <div class="tldr mt-8 mx-auto" style="max-width: 800px;">
+        <p class="text-lg">
+          <b>TL;DR:</b> MotionSight: A zero-shot method and dataset (MotionVid-QA) for fine-grained video motion understanding with MLLMs.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rest of the original content -->
+  <!-- <section class="hero teaser">
+    <div class="hero-body">
+      <div class="columns is-centered">
+        <h2 class="title is-3">How well do MLLMs understand fine-grained video motion?</h2>
+      </div>
+      <div class="container is-max-desktop">
+        <div class="image-container" style="text-align: center; max-width: 800px; margin: 0 auto;">
+          <div class="video-responsive" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WT9YtBabqzU" title="MotionSight Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section id="abstract" class="section" style="margin-top: 1rem;">
+    <div class="container is-max-desktop">
+
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Despite advancements in Multimodal Large Language Models (MLLMs), their proficiency in fine-grained video motion understanding remains critically limited. They often lack inter-frame differencing and tend to average or ignore subtle visual cues. Furthermore, while visual prompting has shown potential in static images, its application to video's temporal complexities, particularly for fine-grained motion understanding, remains largely unexplored. We investigate whether inherent capability can be unlocked and boost MLLMs' motion perception and enable distinct visual signatures tailored to decouple object and camera motion cues. In this study, we introduce <span style="font-family:monospace;">MotionSight</span>, a novel zero-shot method pioneering object-centric visual spotlight and motion blur as visual prompts to effectively improve fine-grained motion understanding without training. To convert this into valuable data assets, we curated <span style="font-family:monospace;">MotionVid-QA</span>, the first large-scale dataset for fine-grained video motion understanding, with hierarchical annotations including SFT and preference data, <span style="font-family:monospace;">&#920;(40K)</span> video clips and <span style="font-family:monospace;">&#920;(87K)</span> QAs. Experiments show <span style="font-family:monospace;">MotionSight</span> achieves state-of-the-art open-source performance and competitiveness with commercial models. In particular, for fine-grained motion understanding we present a novel zero-shot technique and a large-scale, high-quality dataset. All the code and annotations will be publicly available.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenges" class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <h2 class="title is-3">What are the Challenges?</h2>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+            <ul>
+            <li><strong>Temporal complexity:</strong> Unlike static images, videos contain a temporal dimension with continuous changes, making it difficult for models to capture and analyze fine-grained motion cues from both objects and camera movements.</li>
+            <li><strong>Lack of explicit motion modeling:</strong> Current MLLMs often process spatial regions with uniform importance and lack mechanisms to discern subtle inter-frame variations, leading to suboptimal fine-grained motion understanding.</li>
+            <li><strong>Inadequacy of image-based prompting:</strong> Visual prompting methods effective for images (e.g., background blur) do not transfer well to video, sometimes even degrading performance due to loss of contextual information.</li>
+            <li><strong>Extraction and utilization of implicit knowledge:</strong> Even if MLLMs acquire fine-grained motion understanding, it is challenging to explicitly extract and structure this knowledge for downstream tasks and dataset construction.</li>
+            </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <h2 class="title is-3">Fine-grained motion understanding is challenging</h2>
+      </div>
+      <div class="image-container">
+        <img src="./assets/teaser.png" alt="challenges" style="margin: 0 auto; max-width: 90%;">
+        <p class="image-caption">Illustration of the challenges in fine-grained motion understanding.</p>
+      </div>
+      <br>
+    </div>
+  </section>
+      
+  <section id="pipeline" class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <h2 class="title is-3">Our dedicated pipeline</h2>
+      </div>
+      <div class="image-container">
+        <img src="./assets/pipeline.png" alt="pipeline" style="margin: 0 auto; max-width: 90%;">
+        <p class="image-caption">Our dedicated <strong>MotionSight</strong> pipeline for fine-grained motion understanding.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="data-statistic">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <h2 class="title is-3">Data Statistic</h2>
+      </div>
+      <div class="image-container">
+        <img src="./assets/stat.png" alt="stat" style="margin: 0 auto; max-width: 90%;">
+        <p class="image-caption">Statistical analysis of the MotionVid-QA dataset.</p>
+      </div>
+    </div>
+  </section>
+
+<section id="results" class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <h2 class="title is-3">More Examples</h2>
+    </div>
+    <div class="image-container">
+      <img src="./assets/example.png" alt="examples" style="margin: 0 auto; max-width: 90%;">
+      <p class="image-caption">
+        <strong>Fine-grained motion understanding by <a href="https://www.capcut.com/">MotionSight</a></strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="main-results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <h2 class="title is-3">Main Results compared with SoTA Multi-modal Language Models</h2>
+    </div>
+    <div class="image-container">
+      <img src="./assets/main_res.png" alt="results" style="margin: 0 auto; max-width: 90%;">
+      <p class="image-caption">
+        <strong>Quantitative results on MotionBench</strong>
+      </p>
+    </div>
+    <div class="image-container mt-4">
+      <img src="./assets/main_res2.png" alt="results2" style="margin: 0 auto; max-width: 90%;">
+      <p class="image-caption">
+        <strong>Quantitative results on FAVOR-Bench</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+    <section class="section" id="BibTeX">
+      <div class="container content is-max-desktop">
+        <h2 class="title">BibTeX</h2>
+        <div class="relative">
+          <button onclick="copyBibTeX()" class="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-1 px-3 rounded-lg flex items-center transition-all">
+            <i class="fas fa-copy mr-1"></i> Copy
+          </button>
+          <pre id="bibtex-content"><code>@article{du2025motionsight,
+title={MotionSight: Boosting Fine-Grained Motion Understanding in Multimodal LLMs},
+author={Du, Yipeng and Fan, Tiehan and Nan, Kepan and Xie, Rui and Zhou, Penghao and Li, Xiang and Yang, Jian and Yang, Zhengheng and Tai, Ying},
+year={2025}
+}
+</code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8 has-text-centered">
+            <div class="content">
+              <p class="credit">The source code of this webpage is based on the <a href="https://github.com/nerfies/nerfies.github.io/">Nerfies</a>, <a href="https://showlab.github.io/VideoGUI/">VideoGUI</a> and <a href="https://describe-anything.github.io/">Describe Anything</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="./static/slick/slick.min.js"></script>
+    
+    <!-- Added JavaScript for smooth scrolling and interactive elements -->
+    <script>
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 70, // Adjust for header height
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Function to copy BibTeX content
+      function copyBibTeX() {
+        const bibtexContent = document.getElementById('bibtex-content').textContent;
+        navigator.clipboard.writeText(bibtexContent).then(() => {
+          const copyButton = document.querySelector('#BibTeX button');
+          const originalText = copyButton.innerHTML;
+          copyButton.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
+          copyButton.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+          copyButton.classList.add('bg-green-200', 'hover:bg-green-300');
+          
+          setTimeout(() => {
+            copyButton.innerHTML = originalText;
+            copyButton.classList.remove('bg-green-200', 'hover:bg-green-300');
+            copyButton.classList.add('bg-gray-200', 'hover:bg-gray-300');
+          }, 2000);
+        });
+      }
+      
+      // Add fade-in effect to images when they come into view
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+      
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      // Observe all image containers
+      document.querySelectorAll('.image-container').forEach(container => {
+        container.style.opacity = '0';
+        container.style.transform = 'translateY(20px)';
+        container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(container);
+      });
+      
+      // Active state for navigation links based on scroll position
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        
+        document.querySelectorAll('section[id]').forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            document.querySelectorAll('.nav-links a').forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      });
+    </script>
+</body>
+
+</html>
+
