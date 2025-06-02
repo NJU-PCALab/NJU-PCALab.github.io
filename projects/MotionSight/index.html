@@ -59,7 +59,7 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
-
+  
   <!-- Custom CSS to match describe-anything design -->
   <style>
     :root {
@@ -519,6 +519,11 @@
           <sup>&#9826;</sup>Nankai University</span>
       </div>
 
+      <!-- Equal contribution note -->
+      <div class="text-center mt-2 mb-4">
+        <span class="text-sm text-gray-600 italic">* Equal contribution.&nbsp;&nbsp;&nbsp;<i class="fas fa-envelope"></i> indicates corresponding author.</span>
+      </div>
+
       <div class="flex flex-wrap justify-center mt-8 gap-10" style="max-width: 800px; margin: 0 auto;">
         <a href="https://arxiv.org/abs/2406.10227" class="flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
           <i class="ai ai-arxiv text-5xl"></i>
@@ -703,90 +708,90 @@
       </div>
     </footer>
 
-    <script type="text/javascript" src="./static/slick/slick.min.js"></script>
-    
-    <!-- Added JavaScript for smooth scrolling and interactive elements -->
-    <script>
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          
-          const targetId = this.getAttribute('href');
-          const targetElement = document.querySelector(targetId);
-          
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 70, // Adjust for header height
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
-      
-      // Function to copy BibTeX content
-      function copyBibTeX() {
-        const bibtexContent = document.getElementById('bibtex-content').textContent;
-        navigator.clipboard.writeText(bibtexContent).then(() => {
-          const copyButton = document.querySelector('#BibTeX button');
-          const originalText = copyButton.innerHTML;
-          copyButton.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
-          copyButton.classList.remove('bg-gray-200', 'hover:bg-gray-300');
-          copyButton.classList.add('bg-green-200', 'hover:bg-green-300');
-          
-          setTimeout(() => {
-            copyButton.innerHTML = originalText;
-            copyButton.classList.remove('bg-green-200', 'hover:bg-green-300');
-            copyButton.classList.add('bg-gray-200', 'hover:bg-gray-300');
-          }, 2000);
-        });
-      }
-      
-      // Add fade-in effect to images when they come into view
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-      };
-      
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-      
-      // Observe all image containers
-      document.querySelectorAll('.image-container').forEach(container => {
-        container.style.opacity = '0';
-        container.style.transform = 'translateY(20px)';
-        container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(container);
-      });
-      
-      // Active state for navigation links based on scroll position
-      window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
+  <script type="text/javascript" src="./static/slick/slick.min.js"></script>
+  
+  <!-- Added JavaScript for smooth scrolling and interactive elements -->
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
         
-        document.querySelectorAll('section[id]').forEach(section => {
-          const sectionTop = section.offsetTop - 100;
-          const sectionHeight = section.offsetHeight;
-          const sectionId = section.getAttribute('id');
-          
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            document.querySelectorAll('.nav-links a').forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === `#${sectionId}`) {
-                link.classList.add('active');
-              }
-            });
-          }
-        });
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 70, // Adjust for header height
+            behavior: 'smooth'
+          });
+        }
       });
-    </script>
+    });
+    
+    // Function to copy BibTeX content
+    function copyBibTeX() {
+      const bibtexContent = document.getElementById('bibtex-content').textContent;
+      navigator.clipboard.writeText(bibtexContent).then(() => {
+        const copyButton = document.querySelector('#BibTeX button');
+        const originalText = copyButton.innerHTML;
+        copyButton.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
+        copyButton.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+        copyButton.classList.add('bg-green-200', 'hover:bg-green-300');
+        
+        setTimeout(() => {
+          copyButton.innerHTML = originalText;
+          copyButton.classList.remove('bg-green-200', 'hover:bg-green-300');
+          copyButton.classList.add('bg-gray-200', 'hover:bg-gray-300');
+        }, 2000);
+      });
+    }
+    
+    // Add fade-in effect to images when they come into view
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all image containers
+    document.querySelectorAll('.image-container').forEach(container => {
+      container.style.opacity = '0';
+      container.style.transform = 'translateY(20px)';
+      container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(container);
+    });
+    
+    // Active state for navigation links based on scroll position
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+      
+      document.querySelectorAll('section[id]').forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
