@@ -258,9 +258,21 @@
     /* Responsive styles */
     @media (max-width: 768px) {
       .nav-links {
-        flex-direction: column;
-        gap: 0.5rem;
-        padding: 0.5rem 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 1rem 0;
+      }
+
+      .nav-links li {
+        margin: 0;
+      }
+      
+      .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+        white-space: nowrap;
       }
       
       h2 {
@@ -268,24 +280,31 @@
       }
       
       .hero-section {
-        padding-top: 260px; /* Increased padding to accommodate the vertical menu */
+        padding-top: 100px; /* Adjusted for horizontal menu */
       }
 
       /* Fix for mobile banner display */
       .site-header {
-        position: absolute;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
         height: auto;
         background-color: rgba(255, 255, 255, 0.98);
         box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
       }
 
       .main-nav {
-        padding: 0.5rem 0;
+        padding: 0;
       }
 
       /* Fix for all sections to properly respect header on mobile */
       section {
         padding-top: 30px !important;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
       }
       
       /* Fix for author affiliations symbols on mobile */
@@ -321,6 +340,13 @@
         line-height: 1.4;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        max-width: 100%;
+      }
+      
+      .site-footer .container {
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
       }
     }
     
@@ -644,8 +670,12 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-8 has-text-centered">
-            <div class="content">
-              <p class="credit" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%;">The source code of this webpage is based on the <a href="https://github.com/nerfies/nerfies.github.io/">Nerfies</a>, <a href="https://showlab.github.io/VideoGUI/">VideoGUI</a> and <a href="https://describe-anything.github.io/">Describe Anything</a>.</p>
+            <div class="content" style="max-width: 100%; overflow: hidden;">
+              <p class="credit" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; display: inline-block;">
+                The source code of this webpage is based on the <a href="https://github.com/nerfies/nerfies.github.io/">Nerfies</a>, 
+                <a href="https://showlab.github.io/VideoGUI/">VideoGUI</a> and 
+                <a href="https://describe-anything.github.io/">Describe Anything</a>.
+              </p>
             </div>
           </div>
         </div>
