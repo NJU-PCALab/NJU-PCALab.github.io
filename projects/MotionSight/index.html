@@ -333,20 +333,41 @@
         position: relative;
       }
 
-      /* Fix for footer credits */
-      .credit {
-        white-space: normal;
-        font-size: 14px;
-        line-height: 1.4;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        max-width: 100%;
+      /* Improved footer for mobile */
+      .site-footer {
+        width: 100%;
+        overflow: hidden;
+        padding: 1.5rem 0;
       }
       
       .site-footer .container {
         width: 100%;
         padding: 0 15px;
         box-sizing: border-box;
+        overflow: hidden;
+      }
+      
+      .site-footer .content {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      
+      /* Fix for footer credits */
+      .credit {
+        white-space: normal !important;
+        font-size: 14px;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        width: 100%;
+        max-width: 100%;
+        display: block;
+      }
+      
+      .credit a {
+        display: inline;
+        white-space: normal;
       }
     }
     
@@ -671,7 +692,7 @@
         <div class="columns is-centered">
           <div class="column is-8 has-text-centered">
             <div class="content" style="max-width: 100%; overflow: hidden;">
-              <p class="credit" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; display: inline-block;">
+              <p class="credit" style="word-wrap: break-word; overflow-wrap: break-word; white-space: normal; width: 100%; display: block;">
                 The source code of this webpage is based on the <a href="https://github.com/nerfies/nerfies.github.io/">Nerfies</a>, 
                 <a href="https://showlab.github.io/VideoGUI/">VideoGUI</a> and 
                 <a href="https://describe-anything.github.io/">Describe Anything</a>.
