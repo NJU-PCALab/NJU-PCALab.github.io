@@ -727,10 +727,52 @@
     </div>
   </section>
 
-  <section id="abstract" class="section" style="padding-top: 0 !important; margin-top: -200px;">
+
+  <!-- Abstract. 图文-->
+<section id="abstract" class="section" style="padding-top: 0 !important; margin-top: -200px;">
+  <div class="container is-max-desktop">
+    
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered is-vcentered">
+      
+      <div class="column is-two-fifths">
+        <figure class="image">
+          <img src="./assets/teaser.png" alt="Abstract Image" style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%;">
+        </figure>
+      </div> <div class="column is-three-fifths" style="padding-left: 2rem; padding-right: 2rem;">
+        <div class="content has-text-justified">
+          <p>
+            Pixel diffusion models have recently regained attention for visual generation.
+            However, training advanced pixel-space models from scratch demands prohibitive
+            computational and data resources. To address this, we propose the <b>Latent-to-Pixel
+            (L2P)</b> transfer paradigm, an efficient framework that directly harnesses the rich
+            knowledge of pre-trained LDMs to build powerful pixel-space models. Specifically,
+            L2P discards the VAE in favor of large-patch tokenization and freezes the source
+            LDM's intermediate layers, exclusively training shallow layers to learn the
+            latent-to-pixel transformation. By utilizing LDM-generated synthetic images as
+            the sole training corpus, L2P fits an already smooth data manifold, enabling
+            rapid convergence with zero real-data collection. This strategy allows L2P to
+            seamlessly migrate massive latent priors to the pixel space using only 8 GPUs.
+            Furthermore, eliminating the VAE memory bottleneck unlocks native 4K ultra-high
+            resolution generation. Extensive experiments across mainstream LDM architectures
+            show that L2P incurs negligible training overhead, yet performs on par with the
+            source LDM on DPG-Bench and reaches 93% performance on GenEval.
+          </p>
+        </div>
+      </div>
+
+    </div> </div> </section>
+
+
+  <!-- Abstract. 纯文字版-->
+  <!-- <section id="abstract" class="section" style="padding-top: 0 !important; margin-top: -200px;">
     <div class="container is-max-desktop">
 
-      <!-- Abstract. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3">Abstract</h2>
@@ -756,35 +798,8 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- <section id="challenges" class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <h2 class="title is-3">What are the Challenges?</h2>
-      </div>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <div class="content has-text-justified">
-            <p>
-            <ul>
-              <li><strong>TODO</strong> TODO</li>
-            </ul>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="columns is-centered">
-        <h2 class="title is-3">Challenges</h2>
-      </div>
-      <div class="image-container">
-        <img src="./assets/TODO.png" alt="challenges" style="margin: 0 auto; max-width: 90%;">
-        <p class="image-caption">Illustration of the challenges in fine-grained motion understanding.</p>
-      </div>
-      <br>
-    </div>
   </section> -->
+
 
   <section id="pipeline" class="section">
     <div class="container is-max-desktop">
