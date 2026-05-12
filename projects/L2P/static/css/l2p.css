@@ -1,0 +1,73 @@
+/* --- Pure CSS Marquee (零滞后跑马灯 - 统一高度版) --- */
+.marquee-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 15px 0;
+    /* 上下留点空间给阴影和放大效果 */
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    /* 15s 控制滚动速度 */
+    animation: marquee-scroll 60s linear infinite;
+}
+
+/* 悬停瞬间暂停 */
+.marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    height: 400px;
+    /* 【核心修改】统一设置图片容器的高度 */
+    margin: 0 12px;
+    /* 图片左右间距 */
+    flex-shrink: 0;
+}
+
+.marquee-item img {
+    height: 100%;
+    /* 让图片撑满 220px 的高度 */
+    width: auto;
+    /* 宽度根据原图比例自动计算，绝不拉伸变形 */
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: block;
+    /* 去除底部默认空白间隙 */
+}
+
+.marquee-item img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* 恰好滚动完第一组图片 */
+}
+
+/* 移动端适配：手机屏幕较小，等比例缩小高度 */
+@media (max-width: 768px) {
+    .marquee-item {
+        height: 140px;
+    }
+
+    /* 手机端高度调低 */
+    .marquee-track {
+        animation-duration: 10s;
+    }
+
+    /* 手机端视距短，适当加快 */
+}

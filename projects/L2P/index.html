@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- <meta name="description"
+        content="HyperNeRF handles topological variations by modeling a family of shapes in a higher-dimensional space, thereby producing more realistic renderings and more accurate geometric reconstructions.">
+  <meta name="keywords" content="HyperNeRF, Nerfies, D-NeRF, NeRF"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="image_src" href="./static/images/thumbnail.png"> -->
+  <!-- <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.png"/> -->
+  <!-- <link rel="icon" type="image/x-icon" href="assets/motionsight.png"> -->
+
+
+  <title>L2P</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EDF010G6PN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EDF010G6PN');
+
+
+  </script>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts - Varela Round and Open Sans (matching describe-anything design) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Varela+Round&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css" />
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/l2p.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <!-- Custom CSS to match describe-anything design -->
+  <style>
+    :root {
+      --primary-color: #000;
+      --secondary-color: #333;
+      --accent-color: #667eea;
+      --text-color: #2d3748;
+      --light-text: #4a5568;
+      --background-color: #ffffff;
+      --light-bg: #f7fafc;
+      --border-color: #e2e8f0;
+      --shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.1), 0 5px 20px 0px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+      background-color: var(--background-color);
+      font-size: 17px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Varela Round', sans-serif;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h2:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -15px;
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      border-radius: 3px;
+      box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 5px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .nav-links a:hover:after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--accent-color);
+    }
+
+    .nav-links a.active:after {
+      width: 100%;
+      background-color: var(--accent-color);
+    }
+
+    .hero-section {
+      padding-top: 100px;
+      padding-bottom: 2rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .title-row {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .author-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .author-col {
+      margin: 0 15px;
+      text-align: center;
+    }
+
+    .image-container {
+      margin: 2rem 0;
+      padding: 1rem;
+      position: relative;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      background-color: white;
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .image-container:hover {
+      box-shadow: 0 10px 30px 0px rgba(0, 0, 0, 0.25), 0 10px 15px 0px rgba(0, 0, 0, 0.15);
+    }
+
+    .section {
+      margin-top: 5rem;
+      padding: 0;
+    }
+
+    .tldr {
+      background-color: var(--light-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 2rem 0;
+      box-shadow: var(--shadow);
+      font-size: 1.2rem;
+      color: var(--light-text);
+      line-height: 1.6;
+    }
+
+    .site-footer {
+      background-color: var(--light-bg);
+      padding: 2rem 0;
+      margin-top: 4rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* 跑马灯视口：遮掉溢出的部分 */
+    .marquee-wrapper {
+      overflow: hidden;
+      width: 100%;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); /* 可选：两端淡出，显得更高档 */
+    }
+
+    /* 跑马灯轨道：确保图片并排 */
+    .marquee-track {
+      display: flex;
+      width: max-content; /* 重要：让轨道宽度由内容决定 */
+      animation: scroll 30s linear infinite; /* 这里的动画名称需对应你定义的 @keyframes */
+    }
+
+    /* 单个图片项：这里控制大小 */
+      .marquee-item {
+        width: 160px;      /* 调整这个数值，越小图片越清晰 */
+        padding: 0 10px;   /* 间距 */
+        flex-shrink: 0;
+      }
+
+      .marquee-item img {
+        width: 100%;
+        height: 160px;     /* 如果想做成正方形可以固定高度 */
+        object-fit: cover;
+        display: block;
+      }
+
+      /* 动画示例 */
+      @keyframes scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } /* 因为你复制了一组，所以移动到一半 */
+      }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 1rem 0;
+      }
+
+      .nav-links li {
+        margin: 0;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+        white-space: nowrap;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero-section {
+        padding-top: 100px;
+        /* Adjusted for horizontal menu */
+      }
+
+      /* Fix for mobile banner display */
+      .site-header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        height: auto;
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .main-nav {
+        padding: 0;
+      }
+
+      /* Fix for all sections to properly respect header on mobile */
+      section {
+        padding-top: 30px !important;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      /* Fix for author affiliations symbols on mobile */
+      sup {
+        font-size: 0.7rem;
+        line-height: 0;
+        vertical-align: super;
+      }
+
+      /* Fix author blocks on mobile */
+      .author-block {
+        display: inline-block;
+        margin: 0 5px 5px 0;
+      }
+
+      /* Fix for BibTeX on mobile */
+      #bibtex-content {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        font-size: 0.85rem;
+        padding: 1rem;
+      }
+
+      .relative {
+        position: relative;
+      }
+
+      /* Improved footer for mobile */
+      .site-footer {
+        width: 100%;
+        overflow: hidden;
+        padding: 1.5rem 0;
+      }
+
+      .site-footer .container {
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      .site-footer .content {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      /* Fix for footer credits */
+      .credit {
+        white-space: normal !important;
+        font-size: 14px;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        width: 100%;
+        max-width: 100%;
+        display: block;
+      }
+
+      .credit a {
+        display: inline;
+        white-space: normal;
+      }
+    }
+
+    /* Override any existing navbar styles */
+    .navbar {
+      display: none;
+    }
+
+    .columns.is-centered {
+      text-align: center;
+    }
+
+    .columns.is-centered h2 {
+      display: inline-block;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .image-caption {
+      font-size: 1.2rem;
+      color: #f97316;
+      /* Orange color */
+      text-align: center;
+      margin-top: 1rem;
+      font-style: italic;
+      line-height: 1.5;
+      opacity: 1;
+    }
+
+    .image-caption strong {
+      font-weight: 600;
+      color: #f97316;
+      /* Orange color */
+    }
+
+    .image-caption a {
+      color: #f97316;
+      /* Orange color */
+      text-decoration: none;
+      border-bottom: 1px dotted #f97316;
+      transition: all 0.2s ease;
+    }
+
+    .image-caption a:hover {
+      border-bottom: 1px solid #f97316;
+      opacity: 0.8;
+    }
+
+    .author-block a {
+      color: var(--text-color);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .author-block a:hover {
+      color: var(--accent-color);
+    }
+
+    .author-block a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    .author-block a:hover::after {
+      width: 100%;
+    }
+
+    .credit {
+      white-space: nowrap;
+      width: 100%;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Original navbar is hidden by CSS, replaced with the new one below -->
+  <!-- <ul class="navbar" id="navbar">
+    <li><a href="#home"><img src="assets/motionsight.png" alt="Home"
+          style="height:30px; width:30px; vertical-align:middle; margin-right:5px;"> <strong>MotionSight</strong> </a>
+    </li>
+  </ul> -->
+
+  <!-- New header based on describe-anything design -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#pipeline">Pipeline</a></li>
+          <li><a href="#framework">Framework</a></li>
+          <li><a href="#main-results">Comparison</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#BibTeX">Citation</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero section (title and authors) -->
+  <div class="hero-section" id="home">
+    <div class="container">
+      <div class="title-row">
+        <h1 class="title text-4xl md:text-5xl font-bold mb-4">
+          <!-- <img src="assets/motionsight.png" alt="Home" class="inline-block h-10 w-10 align-middle mr-2"> -->
+          <span class="gradient-text">L2P</span>: Unlocking Latent Potential for Pixel Generation
+        </h1>
+      </div>
+      <!-- Authors -->
+      <div class="author-row flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=edoqkgoAAAAJ&hl=en">Zhennan Chen</a><sup>1,2*</sup>
+        </span>
+
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=-OxQlHsAAAAJ&hl=zh-CN">Junwei Zhu</a><sup>2†</sup>
+        </span>
+
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=iB2ylvsAAAAJ&hl=zh-CN">Xu Chen</a><sup>2</sup>
+        </span>
+
+        <span class="author-block text-xl">
+          <a href="https://zhangzjn.github.io/">Jiangning Zhang</a><sup>2</sup>
+        </span>
+
+        <span class="author-block text-xl">
+          <a href="https://github.com/unicornanrocinu">Jiawei Chen</a><sup>1</sup>
+        </span>
+      </div>
+
+      <div class="author-row flex flex-wrap justify-center items-center gap-x-4 gap-y-2 mt-2">
+        <span class="author-block text-xl">
+          <a href="#">Zhuoqi Zeng</a><sup>3</sup>
+        </span>
+
+        <span class="author-block text-xl">
+          <a href="#">Wei Zhang</a><sup>4</sup>
+        </span>
+
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=fqte5H4AAAAJ&hl=zh-CN">Chengjie Wang</a><sup>2</sup>
+        </span>
+
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=6CIDtZQAAAAJ&hl=zh-CN">Jian Yang</a><sup>1</sup>
+        </span>
+
+        <span class="author-block text-xl">
+          <a href="https://scholar.google.com/citations?user=NKaiUasAAAAJ&hl=en">Ying Tai</a><sup>1‡</sup>
+        </span>
+      </div>
+
+      <!-- Affiliations -->
+      <div class="author-row flex flex-wrap justify-center items-center gap-x-6 gap-y-2 mt-4">
+        <span class="author-block text-lg">
+          <sup>1</sup>Nanjing University
+        </span>
+
+        <span class="author-block text-lg">
+          <sup>2</sup>Tencent Youtu Lab
+        </span>
+
+        <span class="author-block text-lg">
+          <sup>3</sup>Hainan-biuh
+        </span>
+
+        <span class="author-block text-lg">
+          <sup>4</sup>Weess Gmbh
+        </span>
+      </div>
+
+      <!-- Equal contribution note -->
+      <div class="text-center mt-2 mb-4">
+        <span class="text-sm text-gray-600 italic">* Work done during the internship at Tencent. &nbsp;&nbsp;&nbsp;
+          † Project Leader. &nbsp;&nbsp;&nbsp;
+          ‡ Corresponding Author. &nbsp;&nbsp;&nbsp;
+        </span>
+      </div>
+
+      <div class="flex flex-wrap justify-center mt-8 gap-6 w-full" style="max-width: 1000px; margin: 0 auto;">
+
+        <a href="TODO" class="w-40 flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="ai ai-arxiv text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Paper</strong>
+        </a>
+
+        <a href="#" class="w-40 flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="fab fa-github text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Code <br>(coming soon)</strong>
+        </a>
+
+        <a href="#" class="w-40 flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="fas fa-database text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Dataset <br>(coming soon)</strong>
+        </a>
+
+        <a href="#" class="w-40 flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <span class="text-5xl">🤗</span>
+          <strong class="mt-2 text-gray-600">HF Space <br>(coming soon)</strong>
+        </a>
+
+      </div>
+
+      <!-- <div class="flex flex-wrap justify-center mt-8 gap-10" style="max-width: 800px; margin: 0 auto;">
+
+        <a href="TODO"
+          class="w-32 flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="ai ai-arxiv text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Paper</strong>
+        </a>
+
+        <a href="TODO"
+          class="w-32 flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="fab fa-github text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Code(coming soon)</strong>
+        </a>
+
+        <a href="TODO"
+          class="w-32 flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <i class="fas fa-database text-5xl"></i>
+          <strong class="mt-2 text-gray-600">Dataset(coming soon)</strong>
+        </a>
+
+        <a href="TODO"
+          class="w-32 flex flex-col items-center hover:transform hover:-translate-y-1 transition-all text-center">
+          <span class="text-5xl">🤗</span>
+          <strong class="mt-2 text-gray-600">Hugging Face Space(coming soon)</strong>
+        </a>
+
+      </div> -->
+
+      <!-- TL;DR moved below icons as requested -->
+      <div class="tldr mt-8 mx-auto" style="max-width: 800px;">
+        <p class="text-lg">
+          <b>TL;DR:</b> An efficient transfer paradigm enabling high-quality, end-to-end pixel-space diffusion with minimal computational overhead and data requirements.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Rest of the original content -->
+  <!-- <section class="hero teaser">
+    <div class="hero-body">
+      <div class="columns is-centered">
+        <h2 class="title is-3">How well do MLLMs understand fine-grained video motion?</h2>
+      </div>
+      <div class="container is-max-desktop">
+        <div class="image-container" style="text-align: center; max-width: 800px; margin: 0 auto;">
+          <div class="video-responsive"
+            style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+              src="https://www.youtube.com/embed/WT9YtBabqzU" title="MotionSight Video" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Pure CSS Continuous Carousel Section -->
+  <section class="section" style="margin-top: 1rem; padding-bottom: 0;">
+    <div class="container is-max-desktop">
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          <!-- ====== 第一组图片 ====== -->
+          <div class="marquee-item"><img src="./assets/1k/3.png" alt="Gallery 1"></div>
+          <div class="marquee-item"><img src="./assets/1k/2.png" alt="Gallery 2"></div>
+          <div class="marquee-item"><img src="./assets/1k/image15.png" alt="Gallery 3"></div>
+          <div class="marquee-item"><img src="./assets/1k/image1.png" alt="Gallery 4"></div>
+          <div class="marquee-item"><img src="./assets/1k/image2.png" alt="Gallery 5"></div>
+          <div class="marquee-item"><img src="./assets/1k/image4.png" alt="Gallery 6"></div>
+          <div class="marquee-item"><img src="./assets/1k/image25.png" alt="Gallery 7"></div>
+          <div class="marquee-item"><img src="./assets/1k/image8.png" alt="Gallery 8"></div>
+          <div class="marquee-item"><img src="./assets/1k/image10.png" alt="Gallery 9"></div>
+          <div class="marquee-item"><img src="./assets/1k/image26.png" alt="Gallery 10"></div>
+          <div class="marquee-item"><img src="./assets/1k/image9.png" alt="Gallery 11"></div>
+          <div class="marquee-item"><img src="./assets/4k/image2.jpg" alt="Gallery 12"></div>
+          <div class="marquee-item"><img src="./assets/1k/image6.png" alt="Gallery 13"></div>
+          <div class="marquee-item"><img src="./assets/1k/image14.png" alt="Gallery 14"></div>
+          <div class="marquee-item"><img src="./assets/1k/5.webp" alt="Gallery 15"></div>
+
+
+
+          <!-- ====== 重复一遍 ====== -->
+          <div class="marquee-item"><img src="./assets/1k/3.png" alt="Gallery 1"></div>
+          <div class="marquee-item"><img src="./assets/1k/2.png" alt="Gallery 2"></div>
+          <div class="marquee-item"><img src="./assets/1k/image15.png" alt="Gallery 3"></div>
+          <div class="marquee-item"><img src="./assets/1k/image1.png" alt="Gallery 4"></div>
+          <div class="marquee-item"><img src="./assets/1k/image2.png" alt="Gallery 5"></div>
+          <div class="marquee-item"><img src="./assets/1k/image4.png" alt="Gallery 6"></div>
+          <div class="marquee-item"><img src="./assets/1k/image5.png" alt="Gallery 7"></div>
+          <div class="marquee-item"><img src="./assets/1k/image8.png" alt="Gallery 8"></div>
+          <div class="marquee-item"><img src="./assets/1k/image10.png" alt="Gallery 9"></div>
+          <div class="marquee-item"><img src="./assets/1k/image21.png" alt="Gallery 10"></div>
+          <div class="marquee-item"><img src="./assets/1k/image9.png" alt="Gallery 11"></div>
+          <div class="marquee-item"><img src="./assets/4k/image2.jpg" alt="Gallery 12"></div>
+          <div class="marquee-item"><img src="./assets/1k/image6.png" alt="Gallery 13"></div>
+          <div class="marquee-item"><img src="./assets/1k/image14.png" alt="Gallery 14"></div>
+          <div class="marquee-item"><img src="./assets/1k/5.webp" alt="Gallery 15"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="abstract" class="section" style="padding-top: 0 !important; margin-top: -200px;">
+    <div class="container is-max-desktop">
+
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Pixel diffusion models have recently regained attention for visual generation.
+              However, training advanced pixel-space models from scratch demands prohibitive
+              computational and data resources. To address this, we propose the <b>Latent-to-Pixel
+                (L2P)</b> transfer paradigm, an efficient framework that directly harnesses the rich
+              knowledge of pre-trained LDMs to build powerful pixel-space models. Specifically,
+              L2P discards the VAE in favor of large-patch tokenization and freezes the source
+              LDM's intermediate layers, exclusively training shallow layers to learn the
+              latent-to-pixel transformation. By utilizing LDM-generated synthetic images as
+              the sole training corpus, L2P fits an already smooth data manifold, enabling
+              rapid convergence with zero real-data collection. This strategy allows L2P to
+              seamlessly migrate massive latent priors to the pixel space using only 8 GPUs.
+              Furthermore, eliminating the VAE memory bottleneck unlocks native 4K ultra-high
+              resolution generation. Extensive experiments across mainstream LDM architectures
+              show that L2P incurs negligible training overhead, yet performs on par with the
+              source LDM on DPG-Bench and reaches 93% performance on GenEval.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section id="challenges" class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <h2 class="title is-3">What are the Challenges?</h2>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+            <ul>
+              <li><strong>TODO</strong> TODO</li>
+            </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <h2 class="title is-3">Challenges</h2>
+      </div>
+      <div class="image-container">
+        <img src="./assets/TODO.png" alt="challenges" style="margin: 0 auto; max-width: 90%;">
+        <p class="image-caption">Illustration of the challenges in fine-grained motion understanding.</p>
+      </div>
+      <br>
+    </div>
+  </section> -->
+
+  <section id="pipeline" class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <h2 class="title is-3">Our data construction pipeline</h2>
+      </div>
+      <div class="image-container">
+        <img src="./assets/data_pipeline.jpg" alt="pipeline" style="margin: 0 auto; max-width: 90%;">
+        <!-- <p class="image-caption">Our dedicated <strong>MotionSight</strong> pipeline for fine-grained motion
+          understanding.</p> -->
+      </div>
+    </div>
+  </section>
+
+  <section id="framework" class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <h2 class="title is-3">L2P framework</h2>
+      </div>
+      <div class="image-container">
+        <img src="./assets/l2p_frame.jpg" alt="l2p_frame" style="margin: 0 auto; max-width: 90%;">
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="main-results">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <h2 class="title is-3">Main Results compared with SoTA Image Generation Models</h2>
+      </div>
+      <div class="image-container">
+        <img src="./assets/comp1.jpg" alt="results" style="margin: 0 auto; max-width: 90%;">
+        <!-- <p class="image-caption">
+          <strong>Quantitative results on MotionBench</strong>
+        </p> -->
+      </div>
+      <div class="image-container mt-4">
+        <img src="./assets/comp2.jpg" alt="results2" style="margin: 0 auto; max-width: 90%;">
+        <!-- <p class="image-caption">
+          <strong>Quantitative results on FAVOR-Bench</strong>
+        </p> -->
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <h2 class="title is-3">Gallery</h2>
+      </div>
+
+      <!-- ================= 1K Generation ================= -->
+      <div class="mt-6">
+        <!-- 分类标题 -->
+        <h3
+          class="text-xl font-bold text-center mb-6 text-gray-700 bg-gray-100 py-2 rounded-lg mx-4 tracking-wide shadow-sm">
+          1K Resolution
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image20.png')">
+            <img src="./assets/1k/image20.png" alt="1K Image 2"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/4.png')">
+            <img src="./assets/1k/4.png" alt="1K Image 3"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/1.png')">
+            <img src="./assets/1k/1.png" alt="1K Image 1"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image1.png')">
+            <img src="./assets/1k/image1.png" alt="1K Image 4"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image11.png')">
+            <img src="./assets/1k/image11.png" alt="1K Image 5"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image15.png')">
+            <img src="./assets/1k/image15.png" alt="1K Image 6"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image24.png')">
+            <img src="./assets/1k/image24.png" alt="1K Image 7"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image23.png')">
+            <img src="./assets/1k/image23.png" alt="1K Image 8"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image17.png')">
+            <img src="./assets/1k/image17.png" alt="1K Image 9"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image22.png')">
+            <img src="./assets/1k/image22.png" alt="1K Image 10"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image19.png')">
+            <img src="./assets/1k/image19.png" alt="1K Image 11"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image7.png')">
+            <img src="./assets/1k/image7.png" alt="1K Image 12"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image16.png')">
+            <img src="./assets/1k/image16.png" alt="1K Image 13"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image13.png')">
+            <img src="./assets/1k/image13.png" alt="1K Image 14"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image21.png')">
+            <img src="./assets/1k/image21.png" alt="1K Image 15"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/1k/image4.png')">
+            <img src="./assets/1k/image4.png" alt="1K Image 16"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 4K Generation ================= -->
+      <div class="mt-12">
+        <!-- 分类标题 -->
+        <h3
+          class="text-xl font-bold text-center mb-6 text-gray-700 bg-gray-100 py-2 rounded-lg mx-4 tracking-wide shadow-sm">
+          4K Resolution
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 px-4">
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/4k/image1.jpg')">
+            <img src="./assets/4k/image1.jpg" alt="4K Image 1"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/4k/image2.jpg')">
+            <img src="./assets/4k/image2.jpg" alt="4K Image 2"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/4k/image5.jpg')">
+            <img src="./assets/4k/image5.jpg" alt="4K Image 3"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/4k/image6.jpg')">
+            <img src="./assets/4k/image6.jpg" alt="4K Image 4"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/4k/image7.jpg')">
+            <img src="./assets/4k/image7.jpg" alt="4K Image 5"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/4k/image8.jpg')">
+            <img src="./assets/4k/image8.jpg" alt="4K Image 6"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= 8K Generation ================= -->
+      <div class="mt-12">
+        <!-- 分类标题 -->
+        <h3
+          class="text-xl font-bold text-center mb-6 text-gray-700 bg-gray-100 py-2 rounded-lg mx-4 tracking-wide shadow-sm">
+          Zero-Shot 8K Extrapolation
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 px-4">
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/8k/1.jpg')">
+            <img src="./assets/8k/1.jpg" alt="8K Image 1"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/8k/2.jpg')">
+            <img src="./assets/8k/2.jpg" alt="8K Image 2"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div
+            class="gallery-item cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            onclick="openModal('./assets/8k/3.jpg')">
+            <img src="./assets/8k/3.jpg" alt="8K Image 3"
+              class="w-full aspect-square object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 图片放大模态框 (保持不变，确保放在 section 的后面) -->
+  <div id="imageModal"
+    class="fixed inset-0 z-[9999] hidden bg-black/90 flex justify-center items-center backdrop-blur-sm transition-opacity duration-300 opacity-0"
+    onclick="closeModal()">
+    <button
+      class="absolute top-6 right-8 text-white/70 hover:text-white focus:outline-none text-5xl font-light transition-colors duration-200"
+      onclick="closeModal()">&times;</button>
+    <img id="modalImage"
+      class="max-w-[95%] max-h-[90%] object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300"
+      src="" alt="Enlarged Image" onclick="event.stopPropagation()">
+  </div>
+
+  <section class="section" id="BibTeX">
+    <div class="container content is-max-desktop">
+      <h2 class="title">BibTeX</h2>
+      <div class="relative">
+        <button onclick="copyBibTeX()"
+          class="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-1 px-3 rounded-lg flex items-center transition-all">
+          <i class="fas fa-copy mr-1"></i> Copy
+        </button>
+        <pre id="bibtex-content" style="overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code>
+@article{chen2025dip,
+  title={Dip: Taming diffusion models in pixel space},
+  author={Chen, Zhennan and Zhu, Junwei and Chen, Xu and Zhang, Jiangning and Hu, Xiaobin and Zhao, Hanzhen and Wang, Chengjie and Yang, Jian and Tai, Ying},
+  journal={arXiv preprint arXiv:2511.18822},
+  year={2025}
+}
+</code></pre>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8 has-text-centered">
+          <div class="content" style="max-width: 100%; overflow: hidden;">
+            <p class="credit"
+              style="word-wrap: break-word; overflow-wrap: break-word; white-space: normal; width: 100%; display: block;">
+              The source code of this webpage is based on the <a
+                href="https://github.com/nerfies/nerfies.github.io/">Nerfies</a>,
+              <a href="https://showlab.github.io/VideoGUI/">VideoGUI</a> and
+              <a href="https://describe-anything.github.io/">Describe Anything</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="./static/slick/slick.min.js"></script>
+
+
+  <!-- Added JavaScript for smooth scrolling and interactive elements -->
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 70, // Adjust for header height
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Function to copy BibTeX content
+    function copyBibTeX() {
+      const bibtexContent = document.getElementById('bibtex-content').textContent;
+      navigator.clipboard.writeText(bibtexContent).then(() => {
+        const copyButton = document.querySelector('#BibTeX button');
+        const originalText = copyButton.innerHTML;
+        copyButton.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
+        copyButton.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+        copyButton.classList.add('bg-green-200', 'hover:bg-green-300');
+
+        setTimeout(() => {
+          copyButton.innerHTML = originalText;
+          copyButton.classList.remove('bg-green-200', 'hover:bg-green-300');
+          copyButton.classList.add('bg-gray-200', 'hover:bg-gray-300');
+        }, 2000);
+      });
+    }
+
+    // Add fade-in effect to images when they come into view
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all image containers
+    document.querySelectorAll('.image-container').forEach(container => {
+      container.style.opacity = '0';
+      container.style.transform = 'translateY(20px)';
+      container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(container);
+    });
+
+    // Active state for navigation links based on scroll position
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+
+      document.querySelectorAll('section[id]').forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+
+    // ==========================================
+    // 画廊模态框 (Gallery Lightbox) 逻辑
+    // ==========================================
+
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+
+      modalImg.src = imageSrc;
+
+      // 显示模态框，移除 hidden，触发重绘后改透明度产生淡入效果
+      modal.classList.remove('hidden');
+      // 锁定背景滚动
+      document.body.style.overflow = 'hidden';
+
+      // 短暂延时以激活 CSS transition
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        modalImg.classList.remove('scale-95');
+        modalImg.classList.add('scale-100');
+      });
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+
+      // 添加退场动画
+      modal.classList.add('opacity-0');
+      modalImg.classList.remove('scale-100');
+      modalImg.classList.add('scale-95');
+
+      // 恢复背景滚动
+      document.body.style.overflow = '';
+
+      // 等待动画结束(300ms)后真正隐藏 DOM
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modalImg.src = ''; // 清空 src
+      }, 300);
+    }
+
+    // 支持按下 ESC 键快捷关闭图片
+    document.addEventListener('keydown', function (event) {
+      if (event.key === "Escape") {
+        const modal = document.getElementById('imageModal');
+        if (!modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
